@@ -6,6 +6,8 @@ defmodule SakeApp.Application do
   use Application
 
   def start(_type, _args) do
+    import Supervisor.Spec
+
     children = [
       # Start the Ecto repository
       SakeApp.Repo,
@@ -14,7 +16,8 @@ defmodule SakeApp.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: SakeApp.PubSub},
       # Start the Endpoint (http/https)
-      SakeAppWeb.Endpoint
+      SakeAppWeb.Endpoint,
+      supervisor(Absinthe.Subscription, [SakeAppWeb.Endpoint]),
       # Start a worker by calling: SakeApp.Worker.start_link(arg)
       # {SakeApp.Worker, arg}
     ]

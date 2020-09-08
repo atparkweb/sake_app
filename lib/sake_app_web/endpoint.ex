@@ -1,5 +1,6 @@
 defmodule SakeAppWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :sake_app
+  use Absinthe.Phoenix.Endpoint
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -50,5 +51,7 @@ defmodule SakeAppWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  
+  plug CORSPlug
   plug SakeAppWeb.Router
 end
