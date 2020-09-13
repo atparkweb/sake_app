@@ -3,7 +3,7 @@ defmodule SakeApp.Sake.Polish do
   import Ecto.Changeset
 
   schema "polish" do
-    field :amount, :float
+    field :max_amount, :float
     field :name, :string
 
     timestamps()
@@ -12,7 +12,7 @@ defmodule SakeApp.Sake.Polish do
   @doc false
   def changeset(polish, attrs) do
     polish
-    |> cast(attrs, [:name, :amount])
-    |> validate_required([:name, :amount])
+    |> cast(attrs, [:name, :max_amount])
+    |> validate_required([:name])
   end
 end

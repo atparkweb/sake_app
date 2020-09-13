@@ -14,7 +14,7 @@ defmodule SakeApp.Sake.Rice do
   @doc false
   def changeset(rice, attrs) do
     rice
-    |> cast(attrs, [:name, :name_kanji])
+    |> cast(attrs, [:name, :name_kanji, :prefecture])
     |> validate_required([:name, :name_kanji])
   end
 end

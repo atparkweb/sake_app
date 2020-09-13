@@ -7,7 +7,7 @@ defmodule SakeApp.Sake.Brewery do
     field :name, :string
     field :name_kanji, :string
     
-    belongs_to :regions, {"region", Region}, foreign_key: :region
+    belongs_to :prefectures, {"prefecture", Prefecture}, foreign_key: :prefecture
 
     timestamps()
   end
@@ -15,7 +15,7 @@ defmodule SakeApp.Sake.Brewery do
   @doc false
   def changeset(brewery, attrs) do
     brewery
-    |> cast(attrs, [:name, :name_kanji, :city])
-    |> validate_required([:name, :name_kanji, :city])
+    |> cast(attrs, [:name, :name_kanji, :city, :prefecture])
+    |> validate_required([:name, :name_kanji])
   end
 end
