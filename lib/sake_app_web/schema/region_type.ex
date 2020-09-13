@@ -13,7 +13,7 @@ defmodule SakeAppWeb.Schema.RegionType do
   
   object :region_queries do
     @desc "Get a list of regions"
-    field :list_regions, list_of(:region) do
+    field :regions, list_of(:region) do
       resolve(&Resolvers.GeographyResolver.list_regions/3)
     end
   end
