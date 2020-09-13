@@ -295,4 +295,101 @@ defmodule SakeApp.Sake do
   def change_rice(%Rice{} = rice, attrs \\ %{}) do
     Rice.changeset(rice, attrs)
   end
+  
+
+  alias SakeApp.Sake.Polish
+
+  @doc """
+  Returns the list of rice polish
+
+  ## Examples
+
+      iex> list_polish()
+      [%Polish{}, ...]
+
+  """
+  def list_polish do
+    Repo.all(Polish)
+  end
+
+  @doc """
+  Gets a single polish.
+
+  Raises `Ecto.NoResultsError` if the Polish does not exist.
+
+  ## Examples
+
+      iex> polish_rice!(123)
+      %Polish{}
+
+      iex> get_polish!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_polish!(id), do: Repo.get!(Polish, id)
+
+  @doc """
+  Creates a polish.
+
+  ## Examples
+
+      iex> create_polish(%{field: value})
+      {:ok, %polish{}}
+
+      iex> create_polish(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_polish(attrs \\ %{}) do
+    %Polish{}
+    |> Polish.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a polish.
+
+  ## Examples
+
+      iex> update_polish(rice, %{field: new_value})
+      {:ok, %Polish{}}
+
+      iex> update_polish(rice, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_polish(%Polish{} = polish, attrs) do
+    polish
+    |> polish.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a polish.
+
+  ## Examples
+
+      iex> delete_polish(polish)
+      {:ok, %Polish{}}
+
+      iex> delete_polish(polish)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_polish(%Polish{} = polish) do
+    Repo.delete(polish)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking polish changes.
+
+  ## Examples
+
+      iex> change_polish(polish)
+      %Ecto.Changeset{data: %Polish{}}
+
+  """
+  def change_polish(%Polish{} = polish, attrs \\ %{}) do
+    Polish.changeset(polish, attrs)
+  end
 end
