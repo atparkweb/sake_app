@@ -7,7 +7,6 @@ defmodule SakeApp.Sake do
   alias SakeApp.Repo
   
   alias SakeApp.Sake.Product
-
   alias SakeApp.Sake.Brewery
 
   @doc """
@@ -295,101 +294,196 @@ defmodule SakeApp.Sake do
   def change_rice(%Rice{} = rice, attrs \\ %{}) do
     Rice.changeset(rice, attrs)
   end
-  
 
-  alias SakeApp.Sake.Polish
+  alias SakeApp.Sake.Designation
 
   @doc """
-  Returns the list of rice polish
+  Returns the list of designations.
 
   ## Examples
 
-      iex> list_polish()
-      [%Polish{}, ...]
+      iex> list_designations()
+      [%Designation{}, ...]
 
   """
-  def list_polish do
-    Repo.all(Polish)
+  def list_designations do
+    Repo.all(Designation)
   end
 
   @doc """
-  Gets a single polish.
+  Gets a single designation.
 
-  Raises `Ecto.NoResultsError` if the Polish does not exist.
+  Raises `Ecto.NoResultsError` if the Designation does not exist.
 
   ## Examples
 
-      iex> polish_rice!(123)
-      %Polish{}
+      iex> get_designation!(123)
+      %Designation{}
 
-      iex> get_polish!(456)
+      iex> get_designation!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_polish!(id), do: Repo.get!(Polish, id)
+  def get_designation!(id), do: Repo.get!(Designation, id)
 
   @doc """
-  Creates a polish.
+  Creates a designation.
 
   ## Examples
 
-      iex> create_polish(%{field: value})
-      {:ok, %polish{}}
+      iex> create_designation(%{field: value})
+      {:ok, %Designation{}}
 
-      iex> create_polish(%{field: bad_value})
+      iex> create_designation(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_polish(attrs \\ %{}) do
-    %Polish{}
-    |> Polish.changeset(attrs)
+  def create_designation(attrs \\ %{}) do
+    %Designation{}
+    |> Designation.changeset(attrs)
     |> Repo.insert()
   end
 
   @doc """
-  Updates a polish.
+  Updates a designation.
 
   ## Examples
 
-      iex> update_polish(rice, %{field: new_value})
-      {:ok, %Polish{}}
+      iex> update_designation(designation, %{field: new_value})
+      {:ok, %Designation{}}
 
-      iex> update_polish(rice, %{field: bad_value})
+      iex> update_designation(designation, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_polish(%Polish{} = polish, attrs) do
-    polish
-    |> polish.changeset(attrs)
+  def update_designation(%Designation{} = designation, attrs) do
+    designation
+    |> Designation.changeset(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a polish.
+  Deletes a designation.
 
   ## Examples
 
-      iex> delete_polish(polish)
-      {:ok, %Polish{}}
+      iex> delete_designation(designation)
+      {:ok, %Designation{}}
 
-      iex> delete_polish(polish)
+      iex> delete_designation(designation)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_polish(%Polish{} = polish) do
-    Repo.delete(polish)
+  def delete_designation(%Designation{} = designation) do
+    Repo.delete(designation)
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking polish changes.
+  Returns an `%Ecto.Changeset{}` for tracking designation changes.
 
   ## Examples
 
-      iex> change_polish(polish)
-      %Ecto.Changeset{data: %Polish{}}
+      iex> change_designation(designation)
+      %Ecto.Changeset{data: %Designation{}}
 
   """
-  def change_polish(%Polish{} = polish, attrs \\ %{}) do
-    Polish.changeset(polish, attrs)
+  def change_designation(%Designation{} = designation, attrs \\ %{}) do
+    Designation.changeset(designation, attrs)
+  end
+
+  alias SakeApp.Sake.Type
+
+  @doc """
+  Returns the list of types.
+
+  ## Examples
+
+      iex> list_types()
+      [%Type{}, ...]
+
+  """
+  def list_types do
+    Repo.all(Type)
+  end
+
+  @doc """
+  Gets a single type.
+
+  Raises `Ecto.NoResultsError` if the Type does not exist.
+
+  ## Examples
+
+      iex> get_type!(123)
+      %Type{}
+
+      iex> get_type!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_type!(id), do: Repo.get!(Type, id)
+
+  @doc """
+  Creates a type.
+
+  ## Examples
+
+      iex> create_type(%{field: value})
+      {:ok, %Type{}}
+
+      iex> create_type(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_type(attrs \\ %{}) do
+    %Type{}
+    |> Type.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a type.
+
+  ## Examples
+
+      iex> update_type(type, %{field: new_value})
+      {:ok, %Type{}}
+
+      iex> update_type(type, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_type(%Type{} = type, attrs) do
+    type
+    |> Type.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a type.
+
+  ## Examples
+
+      iex> delete_type(type)
+      {:ok, %Type{}}
+
+      iex> delete_type(type)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_type(%Type{} = type) do
+    Repo.delete(type)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking type changes.
+
+  ## Examples
+
+      iex> change_type(type)
+      %Ecto.Changeset{data: %Type{}}
+
+  """
+  def change_type(%Type{} = type, attrs \\ %{}) do
+    Type.changeset(type, attrs)
   end
 end

@@ -81,7 +81,7 @@ defmodule SakeApp.SakeTest do
     alias SakeApp.Sake.Product
     
     setup do
-      {:ok, prefecture: TestHelpers.prefecture_fixture(), polish: TestHelpers.polish_fixture(), rice: TestHelpers.rice_fixture()}
+      {:ok, prefecture: TestHelpers.prefecture_fixture(), designation: TestHelpers.designation_fixture(), rice: TestHelpers.rice_fixture()}
     end
     
     @valid_attrs %{abv: 120.5, name: "some name", name_kanji: "some name_kanji"}
@@ -98,13 +98,13 @@ defmodule SakeApp.SakeTest do
       assert Sake.get_product!(product.id) == product
     end
 
-    test "create_product/1 with valid data creates a product", %{prefecture: prefecture, polish: polish, rice: rice} do
-      attrs = Enum.into(%{prefecture: prefecture.id, product_polish: polish.id, product_rice: rice.id}, @valid_attrs)
+    test "create_product/1 with valid data creates a product", %{prefecture: prefecture, designation: designation, rice: rice} do
+      attrs = Enum.into(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id}, @valid_attrs)
       assert {:ok, %Product{} = product} = Sake.create_product(attrs)
       assert product.abv == 120.5
       assert product.name == "some name"
       assert product.name_kanji == "some name_kanji"
-      assert product.product_polish == polish.id
+      assert product.designation == designation.id
       assert product.prefecture == prefecture.id
       assert product.product_rice == rice.id
     end
@@ -113,14 +113,14 @@ defmodule SakeApp.SakeTest do
       assert {:error, %Ecto.Changeset{}} = Sake.create_product(@invalid_attrs)
     end
 
-    test "update_product/2 with valid data updates the product", %{prefecture: prefecture, polish: polish, rice: rice} do
+    test "update_product/2 with valid data updates the product", %{prefecture: prefecture, designation: designation, rice: rice} do
       product = TestHelpers.product_fixture()
-      attrs = Enum.into(%{prefecture: prefecture.id, product_polish: polish.id, product_rice: rice.id}, @update_attrs)
+      attrs = Enum.into(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id}, @update_attrs)
       assert {:ok, %Product{} = product} = Sake.update_product(product, attrs)
       assert product.abv == 456.7
       assert product.name == "some updated name"
       assert product.name_kanji == "some updated name_kanji"
-      assert product.product_polish == polish.id
+      assert product.designation == designation.id
       assert product.prefecture == prefecture.id
       assert product.product_rice == rice.id
     end
@@ -199,6 +199,136 @@ defmodule SakeApp.SakeTest do
     test "change_rice/1 returns a rice changeset" do
       rice = TestHelpers.rice_fixture()
       assert %Ecto.Changeset{} = Sake.change_rice(rice)
+    end
+  end
+
+  describe "designations" do
+    alias SakeApp.Sake.Designation
+
+    @valid_attrs %{long_description: "some long_description", name: "some name", polish_ratio_remain: 120.5, short_description: "some short_description"}
+    @update_attrs %{long_description: "some updated long_description", name: "some updated name", polish_ratio_remain: 456.7, short_description: "some updated short_description"}
+    @invalid_attrs %{long_description: nil, name: nil, polish_ratio_remain: nil, short_description: nil}
+
+    def designation_fixture(attrs \\ %{}) do
+      {:ok, designation} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Sake.create_designation()
+
+      designation
+    end
+
+    test "list_designations/0 returns all designations" do
+      designation = designation_fixture()
+      assert Sake.list_designations() == [designation]
+    end
+
+    test "get_designation!/1 returns the designation with given id" do
+      designation = designation_fixture()
+      assert Sake.get_designation!(designation.id) == designation
+    end
+
+    test "create_designation/1 with valid data creates a designation" do
+      assert {:ok, %Designation{} = designation} = Sake.create_designation(@valid_attrs)
+      assert designation.long_description == "some long_description"
+      assert designation.name == "some name"
+      assert designation.polish_ratio_remain == 120.5
+      assert designation.short_description == "some short_description"
+    end
+
+    test "create_designation/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Sake.create_designation(@invalid_attrs)
+    end
+
+    test "update_designation/2 with valid data updates the designation" do
+      designation = designation_fixture()
+      assert {:ok, %Designation{} = designation} = Sake.update_designation(designation, @update_attrs)
+      assert designation.long_description == "some updated long_description"
+      assert designation.name == "some updated name"
+      assert designation.polish_ratio_remain == 456.7
+      assert designation.short_description == "some updated short_description"
+    end
+
+    test "update_designation/2 with invalid data returns error changeset" do
+      designation = designation_fixture()
+      assert {:error, %Ecto.Changeset{}} = Sake.update_designation(designation, @invalid_attrs)
+      assert designation == Sake.get_designation!(designation.id)
+    end
+
+    test "delete_designation/1 deletes the designation" do
+      designation = designation_fixture()
+      assert {:ok, %Designation{}} = Sake.delete_designation(designation)
+      assert_raise Ecto.NoResultsError, fn -> Sake.get_designation!(designation.id) end
+    end
+
+    test "change_designation/1 returns a designation changeset" do
+      designation = designation_fixture()
+      assert %Ecto.Changeset{} = Sake.change_designation(designation)
+    end
+  end
+
+  describe "types" do
+    alias SakeApp.Sake.Type
+
+    @valid_attrs %{long_description: "some long_description", name: "some name", name_kanji: "some name_kanji", short_description: "some short_description"}
+    @update_attrs %{long_description: "some updated long_description", name: "some updated name", name_kanji: "some updated name_kanji", short_description: "some updated short_description"}
+    @invalid_attrs %{long_description: nil, name: nil, name_kanji: nil, short_description: nil}
+
+    def type_fixture(attrs \\ %{}) do
+      {:ok, type} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Sake.create_type()
+
+      type
+    end
+
+    test "list_types/0 returns all types" do
+      type = type_fixture()
+      assert Sake.list_types() == [type]
+    end
+
+    test "get_type!/1 returns the type with given id" do
+      type = type_fixture()
+      assert Sake.get_type!(type.id) == type
+    end
+
+    test "create_type/1 with valid data creates a type" do
+      assert {:ok, %Type{} = type} = Sake.create_type(@valid_attrs)
+      assert type.long_description == "some long_description"
+      assert type.name == "some name"
+      assert type.name_kanji == "some name_kanji"
+      assert type.short_description == "some short_description"
+    end
+
+    test "create_type/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Sake.create_type(@invalid_attrs)
+    end
+
+    test "update_type/2 with valid data updates the type" do
+      type = type_fixture()
+      assert {:ok, %Type{} = type} = Sake.update_type(type, @update_attrs)
+      assert type.long_description == "some updated long_description"
+      assert type.name == "some updated name"
+      assert type.name_kanji == "some updated name_kanji"
+      assert type.short_description == "some updated short_description"
+    end
+
+    test "update_type/2 with invalid data returns error changeset" do
+      type = type_fixture()
+      assert {:error, %Ecto.Changeset{}} = Sake.update_type(type, @invalid_attrs)
+      assert type == Sake.get_type!(type.id)
+    end
+
+    test "delete_type/1 deletes the type" do
+      type = type_fixture()
+      assert {:ok, %Type{}} = Sake.delete_type(type)
+      assert_raise Ecto.NoResultsError, fn -> Sake.get_type!(type.id) end
+    end
+
+    test "change_type/1 returns a type changeset" do
+      type = type_fixture()
+      assert %Ecto.Changeset{} = Sake.change_type(type)
     end
   end
 end
