@@ -21,6 +21,7 @@ defmodule SakeApp.TestHelpers do
   end
 
   def brewery_fixture(attrs \\ %{}) do
+
     {:ok, brewery} =
       attrs
       |> Enum.into(%{
@@ -44,17 +45,27 @@ defmodule SakeApp.TestHelpers do
     product
   end
   
+  def polish_fixture(attrs \\ %{}) do
+    {:ok, polish} =
+      attrs
+      |> Enum.into(%{
+           max_amount: "0.5", 
+           name: "Daiginjo",
+           name_kanji: "大吟醸"
+         })
+      |> Sake.create_polish()
+      
+    polish
+  end
+  
   def rice_fixture(attrs \\ %{}) do
-    prefecture = prefecture_fixture()
     {:ok, rice} =
       attrs
       |> Enum.into(%{
            name: "Test Rice",
-           name_kanji: "test kanji",
-           prefecture: prefecture.id
+           name_kanji: "test kanji"
          })
       |> Sake.create_rice()
-
     rice
   end
   
@@ -62,13 +73,13 @@ defmodule SakeApp.TestHelpers do
     {:ok, designation} =
       attrs
       |> Enum.into(%{
-	  name: "Test Designation",
-	  polish_ratio_remain: 0.5,
-	  short_description: "Test short desc",
-	  long_description: "Test long desc"
-	})
+           name: "Test Designation",
+           polish_ratio_remain: 0.5,
+           short_description: "this is a description of a designation",
+           long_description: "this is a longer description of a designation"
+         })
       |> Sake.create_designation()
-
+      
     designation
   end
 end

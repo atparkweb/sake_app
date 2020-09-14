@@ -1,10 +1,7 @@
 defmodule SakeApp.Accounts.User do
-  use Ecto.Schema
+  use SakeApp.Schema
   import Ecto.Changeset
   
-  @timestamps_opts [type: :utc_datetime_usec]
-  @primary_key {:id, :binary_id, autogenerate: true}
-
   schema "users" do
     field :birthdate, :date
     field :email, :string

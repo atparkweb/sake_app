@@ -1,9 +1,6 @@
 defmodule SakeApp.Sake.Rice do
-  use Ecto.Schema
+  use SakeApp.Schema
   import Ecto.Changeset
-
-  @timestamps_opts [type: :utc_datetime_usec]
-  @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "rice" do
     field :name, :string

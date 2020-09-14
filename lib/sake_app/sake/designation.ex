@@ -1,15 +1,12 @@
 defmodule SakeApp.Sake.Designation do
-  use Ecto.Schema
+  use SakeApp.Schema
   import Ecto.Changeset
 
-  @timestamps_opts [type: :utc_datetime_usec]
-  @primary_key {:id, :binary_id, autogenerate: true}
-
   schema "designations" do
-    field :long_description, :string
     field :name, :string
     field :polish_ratio_remain, :float
     field :short_description, :string
+    field :long_description, :string
 
     timestamps()
   end

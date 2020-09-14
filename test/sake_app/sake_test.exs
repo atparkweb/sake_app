@@ -88,13 +88,13 @@ defmodule SakeApp.SakeTest do
     @update_attrs %{abv: 456.7, name: "some updated name", name_kanji: "some updated name_kanji"} 
     @invalid_attrs %{abv: nil, name: nil, name_kanji: nil}
 
-    test "list_products/0 returns all products" do
-      product = TestHelpers.product_fixture()
+    test "list_products/0 returns all products", %{prefecture: prefecture} do
+      product = TestHelpers.product_fixture(%{prefecture: prefecture.id})
       assert Sake.list_products() == [product]
     end
 
-    test "get_product!/1 returns the product with given id" do
-      product = TestHelpers.product_fixture()
+    test "get_product!/1 returns the product with given id", %{prefecture: prefecture} do
+      product = TestHelpers.product_fixture(%{prefecture: prefecture.id})
       assert Sake.get_product!(product.id) == product
     end
 
@@ -154,13 +154,13 @@ defmodule SakeApp.SakeTest do
     @update_attrs %{name: "some updated name", name_kanji: "some updated name_kanji"}
     @invalid_attrs %{name: nil, name_kanji: nil, prefecture: nil}
 
-    test "list_rice/0 returns all rice" do
-      rice = TestHelpers.rice_fixture()
+    test "list_rice/0 returns all rice", %{prefecture: prefecture} do
+      rice = TestHelpers.rice_fixture(%{prefecture: prefecture.id})
       assert Sake.list_rice() == [rice]
     end
 
-    test "get_rice!/1 returns the rice with given id" do
-      rice = TestHelpers.rice_fixture()
+    test "get_rice!/1 returns the rice with given id", %{prefecture: prefecture} do
+      rice = TestHelpers.rice_fixture(%{prefecture: prefecture.id})
       assert Sake.get_rice!(rice.id) == rice
     end
 
@@ -184,8 +184,8 @@ defmodule SakeApp.SakeTest do
       assert rice.prefecture == prefecture.id
     end
 
-    test "update_rice/2 with invalid data returns error changeset" do
-      rice = TestHelpers.rice_fixture()
+    test "update_rice/2 with invalid data returns error changeset", %{prefecture: prefecture} do
+      rice = TestHelpers.rice_fixture(%{prefecture: prefecture.id})
       assert {:error, %Ecto.Changeset{}} = Sake.update_rice(rice, @invalid_attrs)
       assert rice == Sake.get_rice!(rice.id)
     end
@@ -209,22 +209,13 @@ defmodule SakeApp.SakeTest do
     @update_attrs %{long_description: "some updated long_description", name: "some updated name", polish_ratio_remain: 456.7, short_description: "some updated short_description"}
     @invalid_attrs %{long_description: nil, name: nil, polish_ratio_remain: nil, short_description: nil}
 
-    def designation_fixture(attrs \\ %{}) do
-      {:ok, designation} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Sake.create_designation()
-
-      designation
-    end
-
     test "list_designations/0 returns all designations" do
-      designation = designation_fixture()
+      designation = TestHelpers.designation_fixture()
       assert Sake.list_designations() == [designation]
     end
 
     test "get_designation!/1 returns the designation with given id" do
-      designation = designation_fixture()
+      designation = TestHelpers.designation_fixture()
       assert Sake.get_designation!(designation.id) == designation
     end
 
@@ -241,7 +232,7 @@ defmodule SakeApp.SakeTest do
     end
 
     test "update_designation/2 with valid data updates the designation" do
-      designation = designation_fixture()
+      designation = TestHelpers.designation_fixture()
       assert {:ok, %Designation{} = designation} = Sake.update_designation(designation, @update_attrs)
       assert designation.long_description == "some updated long_description"
       assert designation.name == "some updated name"
@@ -250,19 +241,19 @@ defmodule SakeApp.SakeTest do
     end
 
     test "update_designation/2 with invalid data returns error changeset" do
-      designation = designation_fixture()
+      designation = TestHelpers.designation_fixture()
       assert {:error, %Ecto.Changeset{}} = Sake.update_designation(designation, @invalid_attrs)
       assert designation == Sake.get_designation!(designation.id)
     end
 
     test "delete_designation/1 deletes the designation" do
-      designation = designation_fixture()
+      designation = TestHelpers.designation_fixture()
       assert {:ok, %Designation{}} = Sake.delete_designation(designation)
       assert_raise Ecto.NoResultsError, fn -> Sake.get_designation!(designation.id) end
     end
 
     test "change_designation/1 returns a designation changeset" do
-      designation = designation_fixture()
+      designation = TestHelpers.designation_fixture()
       assert %Ecto.Changeset{} = Sake.change_designation(designation)
     end
   end

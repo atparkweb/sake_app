@@ -1,9 +1,6 @@
 defmodule SakeApp.Sake.Brewery do
-  use Ecto.Schema
+  use SakeApp.Schema
   import Ecto.Changeset
-
-  @timestamps_opts [type: :utc_datetime_usec]
-  @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "breweries" do
     field :city, :string

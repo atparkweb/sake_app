@@ -1,9 +1,6 @@
 defmodule SakeApp.Sake.Product do
-  use Ecto.Schema
+  use SakeApp.Schema
   import Ecto.Changeset
-
-  @timestamps_opts [type: :utc_datetime_usec]
-  @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "products" do
     field :abv,        :float
@@ -14,8 +11,8 @@ defmodule SakeApp.Sake.Product do
     
 
     belongs_to :rice, {"rice", Rice}, foreign_key: :product_rice
-    has_one :designations, {"designation", Designation}, foreign_key: :designation
-    has_one :types, {"type", Type}, foreign_key: :type
+    belongs_to :designations, {"designation", Designation}, foreign_key: :designation
+    belongs_to :types, {"type", Type}, foreign_key: :type
     belongs_to :prefectures, {"prefecture", Prefecture}, foreign_key: :prefecture
     belongs_to :breweries, {"brewery", Brewery}, foreign_key: :brewery
 
@@ -25,7 +22,7 @@ defmodule SakeApp.Sake.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :name_kanji, :abv, :acidity, :smv, :product_rice, :designation, :type, :prefecture, :brewery])
+    |> cast(attrs, [:name, :name_kanji, :abv, :acidity, :smv ])
     |> validate_required([:name, :name_kanji])
   end
 end
