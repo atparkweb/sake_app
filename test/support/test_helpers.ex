@@ -82,4 +82,18 @@ defmodule SakeApp.TestHelpers do
       
     designation
   end
+
+  def type_fixture(attrs \\ %{}) do
+    {:ok, type} =
+      attrs
+      |> Enum.into(%{
+           name: "Test type",
+	   name_kanji: "type kanji",
+           short_description: "this is a description of a type",
+           long_description: "this is a longer description of a type"
+         })
+      |> Sake.create_type()
+      
+    type
+  end
 end
