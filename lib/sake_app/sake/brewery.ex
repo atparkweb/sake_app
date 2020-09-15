@@ -16,6 +16,8 @@ defmodule SakeApp.Sake.Brewery do
   def changeset(brewery, attrs) do
     brewery
     |> cast(attrs, [:name, :name_kanji, :city, :prefecture])
+    |> cast_assoc(:prefectures)
     |> validate_required([:name, :name_kanji])
+    |> unique_constraint(:name)
   end
 end

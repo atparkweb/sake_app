@@ -17,8 +17,8 @@ defmodule SakeApp.Accounts.User do
     user
     |> cast(attrs, [:username, :email, :password_hash, :birthdate])
     |> validate_required([:email])
-    |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
+    |> unique_constraint(:email)
   end
   
   @doc false

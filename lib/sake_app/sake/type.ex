@@ -16,5 +16,6 @@ defmodule SakeApp.Sake.Type do
     type
     |> cast(attrs, [:name, :name_kanji, :long_description, :short_description])
     |> validate_required([:name, :name_kanji, :long_description, :short_description])
+    |> unique_constraint(:name)
   end
 end

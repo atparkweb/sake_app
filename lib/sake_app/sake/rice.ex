@@ -17,5 +17,6 @@ defmodule SakeApp.Sake.Rice do
     |> cast(attrs, [:name, :name_kanji, :prefecture])
     |> cast_assoc(:prefectures)
     |> validate_required([:name, :name_kanji])
+    |> unique_constraint(:name)
   end
 end

@@ -14,7 +14,10 @@ defmodule SakeApp.Geography.Prefecture do
   @doc false
   def changeset(prefecture, attrs) do
     prefecture
-    |> cast(attrs, [:name, :name_kanji])
+    |> cast(attrs, [:name, :name_kanji, :region])
+    |> cast_assoc(:regions)
     |> validate_required([:name, :name_kanji])
+    |> unique_constraint(:name)
+    |> foreign_key_constraint(:region)
   end
 end

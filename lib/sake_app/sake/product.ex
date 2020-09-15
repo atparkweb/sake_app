@@ -31,5 +31,6 @@ defmodule SakeApp.Sake.Product do
     |> cast_assoc(:prefectures)
     |> cast_assoc(:breweries)
     |> validate_required([:name, :name_kanji])
+    |> unique_constraint(:name)
   end
 end

@@ -16,5 +16,6 @@ defmodule SakeApp.Sake.Designation do
     designation
     |> cast(attrs, [:name, :polish_ratio_remain, :long_description, :short_description])
     |> validate_required([:name])
+    |> unique_constraint(:name)
   end
 end

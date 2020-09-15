@@ -15,5 +15,6 @@ defmodule SakeApp.Geography.Region do
     region
     |> cast(attrs, [:name, :name_kanji])
     |> validate_required([:name, :name_kanji])
+    |> unique_constraint(:name)
   end
 end
