@@ -6,7 +6,7 @@ defmodule SakeApp.Geography.Prefecture do
     field :name, :string
     field :name_kanji, :string
     
-    belongs_to :regions, {"region", Region}, foreign_key: :region
+    belongs_to :regions, SakeApp.Geography.Region, foreign_key: :region
 
     timestamps()
   end

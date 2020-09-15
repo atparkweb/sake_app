@@ -5,6 +5,7 @@ defmodule SakeApp.Geography.Region do
   schema "regions" do
     field :name, :string
     field :name_kanji, :string
+    has_many :prefectures, SakeApp.Geography.Prefecture, foreign_key: :region
 
     timestamps()
   end
@@ -12,7 +13,8 @@ defmodule SakeApp.Geography.Region do
   @doc false
   def changeset(region, attrs) do
     region
-    |> cast(attrs, [:name, :name_kanji])
+    |> cast(attrs, [:name, :name_kanji, :region])
+    |> cast_assoc(:region)
     |> validate_required([:name, :name_kanji])
   end
 end
