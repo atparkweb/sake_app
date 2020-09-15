@@ -13,8 +13,7 @@ defmodule SakeApp.Geography.Region do
   @doc false
   def changeset(region, attrs) do
     region
-    |> cast(attrs, [:name, :name_kanji, :region])
-    |> cast_assoc(:region)
+    |> cast(attrs, [:name, :name_kanji])
     |> validate_required([:name, :name_kanji])
   end
 end
