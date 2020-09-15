@@ -1,6 +1,9 @@
 defmodule SakeApp.Sake.Product do
   use SakeApp.Schema
   import Ecto.Changeset
+  
+  alias SakeApp.Geography.Prefecture
+  alias SakeApp.Sake.{Rice, Type, Designation, Brewery}
 
   schema "products" do
     field :abv,        :float
@@ -10,11 +13,11 @@ defmodule SakeApp.Sake.Product do
     field :acidity,    :float
     
 
-    belongs_to :rice, {"rice", Rice}, foreign_key: :product_rice
-    belongs_to :designations, {"designation", Designation}, foreign_key: :designation
-    belongs_to :types, {"type", Type}, foreign_key: :type
-    belongs_to :prefectures, {"prefecture", Prefecture}, foreign_key: :prefecture
-    belongs_to :breweries, {"brewery", Brewery}, foreign_key: :brewery
+    belongs_to :rice, Rice, foreign_key: :product_rice
+    belongs_to :designations, Designation, foreign_key: :designation
+    belongs_to :types, Type, foreign_key: :type
+    belongs_to :prefectures, Prefecture, foreign_key: :prefecture
+    belongs_to :breweries, Brewery, foreign_key: :brewery
 
     timestamps()
   end

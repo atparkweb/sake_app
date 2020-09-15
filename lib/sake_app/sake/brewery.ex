@@ -7,7 +7,7 @@ defmodule SakeApp.Sake.Brewery do
     field :name, :string
     field :name_kanji, :string
     
-    belongs_to :prefectures, {"prefecture", Prefecture}, foreign_key: :prefecture
+    belongs_to :prefectures, SakeApp.Geography.Prefecture, foreign_key: :prefecture
 
     timestamps()
   end
