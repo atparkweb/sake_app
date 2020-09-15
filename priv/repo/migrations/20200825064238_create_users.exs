@@ -11,8 +11,5 @@ defmodule SakeApp.Repo.Migrations.CreateUsers do
 
       timestamps()
     end
-    
-    unique_index(:user, [:email])
-
   end
 end
