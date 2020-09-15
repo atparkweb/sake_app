@@ -45,19 +45,6 @@ defmodule SakeApp.TestHelpers do
     product
   end
   
-  def polish_fixture(attrs \\ %{}) do
-    {:ok, polish} =
-      attrs
-      |> Enum.into(%{
-           max_amount: "0.5", 
-           name: "Daiginjo",
-           name_kanji: "大吟醸"
-         })
-      |> Sake.create_polish()
-      
-    polish
-  end
-  
   def rice_fixture(attrs \\ %{}) do
     {:ok, rice} =
       attrs

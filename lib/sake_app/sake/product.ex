@@ -22,7 +22,11 @@ defmodule SakeApp.Sake.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :name_kanji, :abv, :acidity, :smv ])
+    |> cast(attrs, [:name, :name_kanji, :abv, :acidity, :smv, :designation, :product_rice, :type, :prefecture, :brewery ])
+    |> cast_assoc(:designations)
+    |> cast_assoc(:rice)
+    |> cast_assoc(:prefectures)
+    |> cast_assoc(:breweries)
     |> validate_required([:name, :name_kanji])
   end
 end

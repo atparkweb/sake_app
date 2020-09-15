@@ -93,13 +93,18 @@ defmodule SakeApp.SakeTest do
       assert Sake.list_products() == [product]
     end
 
-    test "get_product!/1 returns the product with given id", %{prefecture: prefecture, designation: designation, rice: rice} do
-      product = TestHelpers.product_fixture(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id})
+    test "get_product!/1 returns the product with given id", %{prefecture: prefecture, designation: designation, rice: rice, type: type} do
+      product = TestHelpers.product_fixture(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id, type: type.id})
       assert Sake.get_product!(product.id) == product
     end
 
     test "create_product/1 with valid data creates a product", %{prefecture: prefecture, designation: designation, rice: rice, type: type} do
-      attrs = Enum.into(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id, type: type.id}, @valid_attrs)
+      attrs = Enum.into(%{
+        prefecture: prefecture.id,
+        designation: designation.id,
+        product_rice: rice.id,
+        type: type.id
+      }, @valid_attrs)
       assert {:ok, %Product{} = product} = Sake.create_product(attrs)
       assert product.abv == 120.5
       assert product.name == "some name"
@@ -114,8 +119,8 @@ defmodule SakeApp.SakeTest do
       assert {:error, %Ecto.Changeset{}} = Sake.create_product(@invalid_attrs)
     end
 
-    test "update_product/2 with valid data updates the product", %{prefecture: prefecture, designation: designation, rice: rice} do
-      product = TestHelpers.product_fixture(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id})
+    test "update_product/2 with valid data updates the product", %{prefecture: prefecture, designation: designation, rice: rice, type: type} do
+      product = TestHelpers.product_fixture(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id, type: type.id})
       attrs = Enum.into(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id}, @update_attrs)
       assert {:ok, %Product{} = product} = Sake.update_product(product, attrs)
       assert product.abv == 456.7
@@ -124,6 +129,7 @@ defmodule SakeApp.SakeTest do
       assert product.designation == designation.id
       assert product.prefecture == prefecture.id
       assert product.product_rice == rice.id
+      assert product.type == type.id
     end
 
     test "update_product/2 with invalid data returns error changeset", %{prefecture: prefecture, designation: designation, rice: rice, type: type} do
