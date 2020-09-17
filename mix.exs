@@ -51,7 +51,8 @@ defmodule SakeApp.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:pbkdf2_elixir, "~> 1.2"},
       {:cors_plug, "~> 2.0"},
-      {:timex, "~> 3.6"}
+      {:timex, "~> 3.6"},
+      {:guardian, "~> 2.0"}
     ]
   end
 
