@@ -18,6 +18,20 @@ config :sake_app, SakeAppWeb.Endpoint,
   pubsub_server: SakeApp.PubSub,
   live_view: [signing_salt: "Mrmc0yZF"]
 
+config :sake_app, SakeApp.Guardian,
+  # optional
+  allowed_algos: ["HS512"],
+  # optional
+  verify_module: Guardian.JWT,
+  issuer: "SakeApp",
+  ttl: {30, :days},
+  allowed_drift: 2000,
+  #optional
+  verify_issuer: true,
+  # generated using: JOSE.JWK.generate_key({:oct, 16}) |> JOSE.JWK.to_map |> elem(1)
+  secret_key: %{"k" => "73vTD523Jc-9Q5D1FlDjIg", "kty" => "oct"},
+  serializer: SakeApp.Guardian
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

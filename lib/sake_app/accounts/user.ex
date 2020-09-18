@@ -8,6 +8,7 @@ defmodule SakeApp.Accounts.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :username, :string
+    field :token, :string
 
     timestamps()
   end
@@ -28,8 +29,14 @@ defmodule SakeApp.Accounts.User do
     |> cast(attrs, [:password])
     |> validate_required(:password)
     |> validate_length(:password, min: 8, max: 100)
-    |> validate_format(:password, ~r/(?=[a-z])/)
+    |> validate_format(:password, ~r/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)
     |> put_pass_hash()
+  end
+  
+  def store_token_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:token])
+    |> validate_required([:token])
   end
   
   defp put_pass_hash(changeset) do
