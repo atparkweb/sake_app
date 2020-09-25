@@ -52,7 +52,8 @@ defmodule SakeApp.MixProject do
       {:pbkdf2_elixir, "~> 1.2"},
       {:cors_plug, "~> 2.0"},
       {:timex, "~> 3.6"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:cachex, "~> 3.3"}
     ]
   end
 
