@@ -11,6 +11,8 @@ defmodule SakeApp.Application do
     children = [
       # Start the Ecto repository
       SakeApp.Repo,
+      # Start the Cachex memory cache
+      {Cachex, name: :sake_app_cache},
       # Start the Telemetry supervisor
       SakeAppWeb.Telemetry,
       # Start the PubSub system

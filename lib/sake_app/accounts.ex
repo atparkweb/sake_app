@@ -5,8 +5,8 @@ defmodule SakeApp.Accounts do
 
   import Ecto.Query, warn: false
   alias SakeApp.Repo
-
   alias SakeApp.Accounts.User
+  alias SakeApp.Cache
 
   @doc """
   Returns the list of users.
@@ -131,8 +131,11 @@ defmodule SakeApp.Accounts do
   end
   
   def store_token(%User{} = user, token) do
-    user
-    |> User.store_token_changeset(%{token: token})
-    |> Repo.update()
+    Cache.put(%{key: user.id, val: token})
+    {:ok, true}
+  end
+  
+  def get_token(%User{} = user) do
+    Cache.get(user.id)
   end
 end
