@@ -6,11 +6,13 @@ defmodule SakeApp.Sake.Product do
   alias SakeApp.Sake.{Rice, Type, Designation, Brewery}
 
   schema "products" do
-    field :abv,        :float
-    field :smv,        :float
-    field :name,       :string
-    field :name_kanji, :string
-    field :acidity,    :float
+    field :abv,         :float
+    field :smv,         :float
+    field :brand,       :string
+    field :brand_kanji, :string
+    field :name,        :string
+    field :name_kanji,  :string
+    field :acidity,     :float
     
 
     belongs_to :rice, Rice, foreign_key: :product_rice
@@ -25,12 +27,12 @@ defmodule SakeApp.Sake.Product do
   @doc false
   def changeset(product, attrs) do
     product
-    |> cast(attrs, [:name, :name_kanji, :abv, :acidity, :smv, :designation, :product_rice, :type, :prefecture, :brewery ])
+    |> cast(attrs, [:brand, :brand_kanji, :name, :name_kanji, :abv, :acidity, :smv, :designation, :product_rice, :type, :prefecture, :brewery ])
     |> cast_assoc(:designations)
     |> cast_assoc(:rice)
     |> cast_assoc(:prefectures)
     |> cast_assoc(:breweries)
-    |> validate_required([:name, :name_kanji])
-    |> unique_constraint(:name)
+    |> validate_required([:brand, :name])
+    |> unique_constraint([:name, :brand])
   end
 end
