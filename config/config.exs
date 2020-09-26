@@ -13,7 +13,7 @@ config :sake_app,
 # Configures the endpoint
 config :sake_app, SakeAppWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "Sj8Bf65hEvsaHVlNKyy3Rk0xcfu4qUDIAqoM8XhbzSiXOobXdclcaeRtQEEQe9Ks",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: SakeAppWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: SakeApp.PubSub,
   live_view: [signing_salt: "Mrmc0yZF"]
