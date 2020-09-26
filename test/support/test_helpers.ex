@@ -37,8 +37,8 @@ defmodule SakeApp.TestHelpers do
     {:ok, product} =
       attrs
       |> Enum.into(%{
-           name: "Yamamoto",
-           name_kanji: "山本"
+           name: "Green Label",
+	   brand: "Yamamoto",
          })
       |> Sake.create_product()
 
@@ -50,7 +50,6 @@ defmodule SakeApp.TestHelpers do
       attrs
       |> Enum.into(%{
            name: "Test Rice",
-           name_kanji: "test kanji"
          })
       |> Sake.create_rice()
     rice
@@ -75,7 +74,6 @@ defmodule SakeApp.TestHelpers do
       attrs
       |> Enum.into(%{
            name: "Test type",
-	   name_kanji: "type kanji",
            short_description: "this is a description of a type",
            long_description: "this is a longer description of a type"
          })
