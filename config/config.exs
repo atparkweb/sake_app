@@ -16,7 +16,7 @@ config :sake_app, SakeAppWeb.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: SakeAppWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: SakeApp.PubSub,
-  live_view: [signing_salt: "Mrmc0yZF"]
+  live_view: [signing_salt: System.get_env("SIGNING_SALT")]
 
 config :sake_app, SakeApp.Guardian,
   # optional
@@ -29,7 +29,7 @@ config :sake_app, SakeApp.Guardian,
   #optional
   verify_issuer: true,
   # generated using: JOSE.JWK.generate_key({:oct, 16}) |> JOSE.JWK.to_map |> elem(1)
-  secret_key: %{"k" => "73vTD523Jc-9Q5D1FlDjIg", "kty" => "oct"},
+  secret_key: %{"k" => System.get_env("GUARDIAN_SECRET"), "kty" => "oct"},
   serializer: SakeApp.Guardian
 
 # Configures Elixir's Logger
