@@ -8,7 +8,7 @@ defmodule SakeAppWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_sake_app_key",
-    signing_salt: "xqlkR6wN"
+    signing_salt: System.get_env("SESSION_SALT")
   ]
 
   socket "/socket", SakeAppWeb.UserSocket,
