@@ -23,13 +23,12 @@ config :sake_app, SakeApp.Guardian,
   allowed_algos: ["HS512"],
   # optional
   verify_module: Guardian.JWT,
-  issuer: "SakeApp",
+  issuer: "sake_app",
   ttl: {30, :days},
   allowed_drift: 2000,
   #optional
   verify_issuer: true,
-  # generated using: JOSE.JWK.generate_key({:oct, 16}) |> JOSE.JWK.to_map |> elem(1)
-  secret_key: %{"k" => System.get_env("GUARDIAN_SECRET"), "kty" => "oct"},
+  secret_key: System.get_env("GUARDIAN_SECRET"),
   serializer: SakeApp.Guardian
 
 # Configures Elixir's Logger
