@@ -132,7 +132,7 @@ defmodule SakeApp.Accounts do
   
   def store_token(%User{} = user, token) do
     Cache.put(%{key: user.id, val: token})
-    {:ok, true}
+    {:ok, user}
   end
   
   def get_token(%User{} = user) do
