@@ -10,8 +10,15 @@ defmodule SakeAppWeb.Schema.AccountTypes do
     field :password, :string
   end
   
+  object :session_user do
+    field :id,       :string
+    field :email,    :string
+    field :username, :string
+  end
+  
   object :session do
-    field :token, :string
+    field :success, :boolean
+    field :user, :session_user
   end
   
   object :account_queries do

@@ -6,10 +6,14 @@ defmodule SakeAppWeb.Resolvers.AccountResolver do
   end
   
   def login(%{email: email, password: password}, _info) do
-    with {:ok, user} <- Accounts.authenticate_by_email_pass(email, password),
-         {:ok, jwt, _} <- SakeApp.Guardian.encode_and_sign(user),
-         {:ok, _ } <- Accounts.store_token(user, jwt) do
-      {:ok, %{token: jwt}}
+    case Accounts.authenticate_by_email_pass(email, password) do
+      {:ok, user} ->
+         with {:ok, jwt, _} <- SakeApp.Guardian.encode_and_sign(user),
+	      {:ok, _ } <- Accounts.store_token(user, jwt) do
+	      {:ok, %{success: true, user: user}}
+	 end
+      {:error, _} ->
+	 {:ok, %{success: false, user: nil}}
     end
   end
 end
