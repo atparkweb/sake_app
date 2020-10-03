@@ -7,6 +7,7 @@ defmodule SakeAppWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
+    secure: true,
     key: "_sake_app_key",
     signing_salt: System.get_env("SESSION_SALT")
   ]

@@ -10,10 +10,10 @@ defmodule SakeAppWeb.Resolvers.AccountResolver do
       {:ok, user} ->
          with {:ok, jwt, _} <- SakeApp.Guardian.encode_and_sign(user),
 	      {:ok, _ } <- Accounts.store_token(user, jwt) do
-	      {:ok, %{success: true, user: user}}
+	      {:ok, %{token: jwt}}
 	 end
       {:error, _} ->
-	 {:ok, %{success: false, user: nil}}
+	 {:ok, %{token: nil}}
     end
   end
 end
