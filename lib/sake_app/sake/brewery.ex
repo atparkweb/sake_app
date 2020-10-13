@@ -3,9 +3,11 @@ defmodule SakeApp.Sake.Brewery do
   import Ecto.Changeset
 
   schema "breweries" do
-    field :city, :string
     field :name, :string
     field :name_kanji, :string
+    field :description, :string
+    field :address, :string
+    field :site_url, :string
     
     belongs_to :prefectures, SakeApp.Geography.Prefecture, foreign_key: :prefecture
 
@@ -15,7 +17,7 @@ defmodule SakeApp.Sake.Brewery do
   @doc false
   def changeset(brewery, attrs) do
     brewery
-    |> cast(attrs, [:name, :name_kanji, :city, :prefecture])
+    |> cast(attrs, [:name, :name_kanji, :prefecture, :description, :address, :site_url])
     |> cast_assoc(:prefectures)
     |> validate_required([:name, :name_kanji])
     |> unique_constraint(:name)
