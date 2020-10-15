@@ -575,3 +575,106 @@ Repo.insert_all(Sake.Type, [
     updated_at: DateTime.truncate(Timex.now, :second)
   },
 ])
+
+%{id: akita} = Repo.get_by!(Geography.Prefecture, name: "Akita")
+%{id: niigata} = Repo.get_by!(Geography.Prefecture, name: "Niigata")
+%{id: hyogo} = Repo.get_by!(Geography.Prefecture, name: "Hyōgo")
+%{id: okayama} = Repo.get_by!(Geography.Prefecture, name: "Okayama")
+%{id: yamagata} = Repo.get_by!(Geography.Prefecture, name: "Yamagata")
+%{id: nagano} = Repo.get_by!(Geography.Prefecture, name: "Nagano")
+
+Repo.insert_all(Sake.Brewery, [
+  %{
+    name: "Saiya",
+    name_kanji: "齋彌",
+    prefecture: akita,
+    description: "",
+    address: "",
+    site_url: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
+    name: "Yamamoto",
+    name_kanji: "山本",
+    prefecture: akita,
+    description: "",
+    address: "",
+    site_url: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
+    name: "Kuribayashi",
+    name_kanji: "栗林",
+    prefecture: akita,
+    description: "",
+    address: "",
+    site_url: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
+    name: "Hokusetsu",
+    name_kanji: "北雪",
+    prefecture: niigata,
+    description: "",
+    address: "",
+    site_url: "https://sake-hokusetsu.com",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
+    name: "Dewazakura",
+    name_kanji: "出羽桜",
+    prefecture: yamagata,
+    description: "",
+    address: "",
+    site_url: "https://www.dewazakura.co.jp/",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  }
+])
+
+Repo.insert_all(Sake.Rice, [
+  %{
+    name: "Yamadanishiki",
+    name_kanji: "山田錦",
+    prefecture: hyogo,
+    description: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
+    name: "Omachi",
+    name_kanji: "雄町",
+    prefecture: okayama,
+    description: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
+    name: "Gohyaku Mangoku",
+    name_kanji: "五百万石",
+    prefecture: niigata,
+    description: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
+    name: "Koshi Tanrei",
+    name_kanji: "越淡麗",
+    prefecture: niigata,
+    description: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
+    name: "Miyama Nishiki",
+    name_kanji: "美山錦",
+    prefecture: nagano,
+    description: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  }
+])
