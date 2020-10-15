@@ -5,6 +5,7 @@ defmodule SakeApp.Sake.Rice do
   schema "rice" do
     field :name, :string
     field :name_kanji, :string
+    field :description, :string
     
     belongs_to :prefectures, SakeApp.Geography.Prefecture, foreign_key: :prefecture
 
