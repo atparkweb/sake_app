@@ -12,17 +12,20 @@ defmodule SakeApp.SakeTest do
     end
     
     @valid_attrs %{
-      city: "some city",
       name: "some name",
       name_kanji: "some name_kanji",
+      description: "a valid good sake",
+      address: "123 hopper avenue",
+      site_url: "https://sake.com"
     }
     @update_attrs %{
-      city: "some updated city",
       name: "some updated name",
-      name_kanji: "some updated name_kanji"
+      name_kanji: "some updated name_kanji",
+      description: "an updated description",
+      address: "456 Elm street",
+      site_url: "https://sake2.com"
     }
     @invalid_attrs %{
-      city: nil,
       name: nil,
       name_kanji: nil
     }
@@ -42,7 +45,7 @@ defmodule SakeApp.SakeTest do
     test "create_brewery/1 with valid data creates a brewery", %{prefecture: prefecture} do
       attrs = Enum.into(%{prefecture: prefecture.id}, @valid_attrs)
       assert {:ok, %Brewery{} = brewery} = Sake.create_brewery(attrs)
-      assert brewery.city == "some city"
+      assert brewery.description == "a valid good sake"
       assert brewery.name == "some name"
       assert brewery.name_kanji == "some name_kanji"
     end
@@ -54,7 +57,9 @@ defmodule SakeApp.SakeTest do
     test "update_brewery/2 with valid data updates the brewery" do
       brewery = TestHelpers.brewery_fixture()
       assert {:ok, %Brewery{} = brewery} = Sake.update_brewery(brewery, @update_attrs)
-      assert brewery.city == "some updated city"
+      assert brewery.description == "an updated description"
+      assert brewery.address == "456 Elm street"
+      assert brewery.site_url == "https://sake2.com"
       assert brewery.name == "some updated name"
       assert brewery.name_kanji == "some updated name_kanji"
     end
