@@ -36,3 +36,7 @@ npm-debug.log
 .env
 
 config/prod.secret.exs
+
+
+# Ignore emacs temp backup files
+.\#*
