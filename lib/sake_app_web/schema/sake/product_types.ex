@@ -1,4 +1,4 @@
-defmodule SakeAppWeb.Schema.SakeTypes do
+defmodule SakeAppWeb.Schema.Sake.ProductTypes do
   use Absinthe.Schema.Notation
   use Absinthe.Ecto, repo: SakeApp.Repo
   
@@ -10,11 +10,15 @@ defmodule SakeAppWeb.Schema.SakeTypes do
     field :smv,         :float
     field :description, :string
     field :notes,       :string
+    field :type,        :type,        resolve: assoc(:type)
+    field :designation, :designation, resolve: assoc(:designation)
+    field :rice,        :rice,        resolve: assoc(:rice)
+    field :brewery,     :brewery,     resolve: assoc(:breweries)
   end
   
   object :product_queries do
-    @desc "Get a list of products"
-    field :list_products, list_of(:product) do
+    @desc "Get a list of all products"
+    field :all_products, list_of(:product) do
       resolve(&SakeResolver.list_products/3)
     end
   end
