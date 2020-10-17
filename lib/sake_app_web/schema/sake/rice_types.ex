@@ -16,10 +16,5 @@ defmodule SakeAppWeb.Schema.Sake.RiceTypes do
     field :all_rice, list_of(:rice) do
       resolve(&SakeResolver.list_rice/3)
     end
-    
-    @desc "Get a single rice variety by :id"
-    field :rice, :rice do
-      resolve(&SakeResolver.get_rice/3)
-    end
   end
 end

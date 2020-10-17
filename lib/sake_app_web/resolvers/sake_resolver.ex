@@ -25,15 +25,13 @@ defmodule SakeAppWeb.Resolvers.SakeResolver do
     {:ok, Sake.list_rice()}
   end
   
-  def get_rice(_parent, args, _resolutions) do
-    args
-    |> Sake.get_designation!
-    |> case do
-         {:ok, designation} ->
-           {:ok, designation}
-         {:error, changeset} ->
-           {:error, Helpers.extract_error_msg(changeset)}
-       end
+  def get_designation(_parent, %{id: id}, _resolutions) do
+    case Sake.get_designation!(id) do
+      nil ->
+	{:error, "Designation with id #{id} not found"}
+      designation ->
+	{:ok, designation}
+    end
   end
   
   def list_designations(_parent, _args, _resolutions) do

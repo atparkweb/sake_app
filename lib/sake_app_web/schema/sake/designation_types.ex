@@ -16,5 +16,11 @@ defmodule SakeAppWeb.Schema.Sake.DesignationTypes do
     field :all_designations, list_of(:designation) do
       resolve(&SakeResolver.list_designations/3)
     end
+    
+    @desc "Get a single designation by :id"
+    field :get_designation, :designation do
+      arg :id, non_null(:id)
+      resolve(&SakeResolver.get_designation/3)
+    end
   end
 end
