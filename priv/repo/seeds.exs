@@ -585,6 +585,16 @@ Repo.insert_all(Sake.Type, [
 
 Repo.insert_all(Sake.Brewery, [
   %{
+    name: "Azakura",
+    name_kanji: "阿櫻",
+    prefecture: akita,
+    description: "",
+    address: "",
+    site_url: "http://azakura.co.jp",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
     name: "Saiya",
     name_kanji: "齋彌",
     prefecture: akita,
@@ -654,6 +664,14 @@ Repo.insert_all(Sake.Rice, [
     updated_at: DateTime.truncate(Timex.now, :second)
   },
   %{
+    name: "Komachi",
+    name_kanji: "小町",
+    prefecture: akita,
+    description: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  },
+  %{
     name: "Gohyaku Mangoku",
     name_kanji: "五百万石",
     prefecture: niigata,
@@ -674,6 +692,30 @@ Repo.insert_all(Sake.Rice, [
     name_kanji: "美山錦",
     prefecture: nagano,
     description: "",
+    inserted_at: DateTime.truncate(Timex.now, :second),
+    updated_at: DateTime.truncate(Timex.now, :second)
+  }
+])
+
+%{ id: komachi } = Repo.get_by!(Sake.Rice, name: "Komachi")
+%{ id: tokubetsu_junmai } = Repo.get_by!(Sake.Designation, name: "Tokubetsu Junmai")
+%{ id: genshu } = Repo.get_by!(Sake.Type, name: "Genshu")
+%{ id: azakura_brewery } = Repo.get_by!(Sake.Brewery, name: "Azakura")
+
+Repo.insert_all(Sake.Product, [
+  %{
+    name: "Kanjikomi",
+    brand: "Azakura",
+    brand_kanji: "阿櫻",
+    prefecture: akita,
+    brewery: azakura_brewery,
+    designation: tokubetsu_junmai,
+    type: genshu,
+    abv: 0.16,
+    long_description: "",
+    short_description: "",
+    tasting_notes: "Rich, Dry",
+    product_rice: komachi,
     inserted_at: DateTime.truncate(Timex.now, :second),
     updated_at: DateTime.truncate(Timex.now, :second)
   }
