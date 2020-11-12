@@ -86,12 +86,42 @@ defmodule SakeApp.SakeTest do
     alias SakeApp.Sake.Product
     
     setup do
-      {:ok, prefecture: TestHelpers.prefecture_fixture(), designation: TestHelpers.designation_fixture(), rice: TestHelpers.rice_fixture(), type: TestHelpers.type_fixture()}
+      {:ok,
+        prefecture: TestHelpers.prefecture_fixture(),
+        designation: TestHelpers.designation_fixture(),
+        rice: TestHelpers.rice_fixture(),
+        type: TestHelpers.type_fixture()
+      }
     end
     
-    @valid_attrs %{abv: 120.5, acidity: 4.0, smv: 2.3, name: "some name", name_kanji: "some name_kanji", brand: "some brand", brand_kanji: "some brand_kanji"}
-    @update_attrs %{abv: 456.7, acidity: 3.0, smv: 1.4, name: "some updated name", name_kanji: "some updated name_kanji", brand: "some updated brand", brand_kanji: "some updated brand_kanji"} 
-    @invalid_attrs %{abv: nil, name: nil, name_kanji: nil, brand: nil, brand_kanji: nil}
+    @valid_attrs %{
+      abv: 120.5,
+      acidity: 4.0,
+      smv: 2.3,
+      name: "some name",
+      name_kanji: "some name_kanji",
+      brand: "some brand",
+      brand_kanji: "some brand_kanji",
+      short_description: "A description",
+      long_description: "A longer description",
+      tasting_notes: "Rich, Sweet"
+    }
+    @update_attrs %{
+      abv: 456.7,
+      acidity: 3.0,
+      smv: 1.4,
+      name: "some updated name",
+      name_kanji: "some updated name_kanji",
+      brand: "some updated brand",
+      brand_kanji: "some updated brand_kanji",
+      short_description: "An updated description",
+      long_description: "A longer updated description",
+      tasting_notes: "Light, Dry"
+    } 
+    @invalid_attrs %{
+      name: nil,
+      brand: nil,
+    }
 
     test "list_products/0 returns all products", %{prefecture: prefecture, designation: designation, rice: rice} do
       product = TestHelpers.product_fixture(%{prefecture: prefecture.id, designation: designation.id, product_rice: rice.id})
@@ -122,6 +152,9 @@ defmodule SakeApp.SakeTest do
       assert product.type == type.id
       assert product.acidity == 4.0
       assert product.smv == 2.3
+      assert product.short_description == "A description"
+      assert product.long_description == "A longer description"
+      assert product.tasting_notes == "Rich, Sweet"
     end
 
     test "create_product/1 with invalid data returns error changeset" do
@@ -143,6 +176,9 @@ defmodule SakeApp.SakeTest do
       assert product.type == type.id
       assert product.acidity == 3.0
       assert product.smv == 1.4
+      assert product.long_description == "A longer updated description"
+      assert product.short_description == "An updated description"
+      assert product.tasting_notes == "Light, Dry"
     end
 
     test "update_product/2 with invalid data returns error changeset", %{prefecture: prefecture, designation: designation, rice: rice, type: type} do
@@ -171,7 +207,10 @@ defmodule SakeApp.SakeTest do
       {:ok, prefecture: TestHelpers.prefecture_fixture()}
     end
 
-    @valid_attrs %{name: "some name", name_kanji: "some name_kanji"}
+    @valid_attrs %{
+      name: "some name",
+      name_kanji: "some name_kanji"
+    }
     @update_attrs %{name: "some updated name", name_kanji: "some updated name_kanji"}
     @invalid_attrs %{name: nil, name_kanji: nil, prefecture: nil}
 
