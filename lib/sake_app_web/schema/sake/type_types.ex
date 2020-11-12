@@ -16,5 +16,11 @@ defmodule SakeAppWeb.Schema.Sake.TypeTypes do
     field :all_types, list_of(:type) do
       resolve(&SakeResolver.list_types/3)
     end
+    
+    @desc "Get a type by name"
+    field :type_by_name, :type do
+      arg :name, non_null(:string)
+      resolve(&SakeResolver.get_type_by_name/3)
+    end
   end
 end

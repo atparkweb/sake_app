@@ -421,6 +421,13 @@ defmodule SakeApp.Sake do
 
   """
   def get_type!(id), do: Repo.get!(Type, id)
+  
+  @doc """
+  Find a type by fields (query)
+  """
+  def get_type_by!(query) do
+    Repo.get_by!(Type, query)
+  end
 
   @doc """
   Creates a type.

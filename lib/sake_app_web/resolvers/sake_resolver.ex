@@ -41,4 +41,13 @@ defmodule SakeAppWeb.Resolvers.SakeResolver do
   def list_types(_parent, _args, _resolutions) do
     {:ok, Sake.list_types()}
   end
+  
+  def get_type_by_name(_parent, %{name: name}, _resolutions) do
+    case Sake.get_type_by!(name: name) do
+      nil ->
+        { :error, "Type with name #{name} not found"}
+      type ->
+	{ :ok, type }
+    end
+  end
 end
