@@ -18,7 +18,7 @@ defmodule SakeAppWeb.Schema.Sake.TypeTypes do
     end
     
     @desc "Get a type by name"
-    field :type_by_name, :type do
+    field :get_type_by_name, :type do
       arg :name, non_null(:string)
       resolve(&SakeResolver.get_type_by_name/3)
     end
