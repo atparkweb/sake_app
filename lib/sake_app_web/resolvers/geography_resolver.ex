@@ -13,7 +13,7 @@ defmodule SakeAppWeb.Resolvers.GeographyResolver do
          {:ok, :region} ->
            {:ok, :region}
          {:error, changeset} ->
-	   {:error, Helpers.extract_error_msg(changeset)}
+     {:error, Helpers.extract_error_msg(changeset)}
        end
   end
   
@@ -21,14 +21,23 @@ defmodule SakeAppWeb.Resolvers.GeographyResolver do
     {:ok, Geography.list_prefectures()}
   end
   
-  def create_prefectures(_parent, args, _resolutions) do
+  def get_prefecture_by_name(_parent, %{ name: name }, _resolutions) do
+    case Geography.get_prefecture_by!(name: name) do
+      nil ->
+  { :error, "Prefecture with name #{name} not found" }
+      prefecture ->
+        { :ok, prefecture }
+    end
+  end
+  
+  def create_prefecture(_parent, args, _resolutions) do
     args
     |> Geography.create_prefecture()
     |> case do
-         {:ok, prefecture} ->
-	   {:ok, prefecture}
-	 {:error, changeset} ->
-           {:error, Helpers.extract_error_msg(changeset)}
+         { :ok, prefecture } ->
+           { :ok, prefecture }
+         { :error, changeset } ->
+           { :error, Helpers.extract_error_msg(changeset) }
        end
   end
 end
