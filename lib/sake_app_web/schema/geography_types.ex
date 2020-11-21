@@ -14,7 +14,7 @@ defmodule SakeAppWeb.Schema.GeographyTypes do
   
   object :region_queries do
     @desc "Get a list of regions"
-    field :regions, list_of(:region) do
+    field :all_regions, list_of(:region) do
       resolve(&GeographyResolver.list_regions/3)
     end
   end
@@ -28,8 +28,14 @@ defmodule SakeAppWeb.Schema.GeographyTypes do
   
   object :prefecture_queries do
     @desc "Get a list of prefectures"
-    field :prefectures, list_of(:prefecture) do
+    field :all_prefectures, list_of(:prefecture) do
       resolve(&GeographyResolver.list_prefectures/3)
+    end
+    
+    @desc "Get a prefecture by name"
+    field :get_prefecture_by_name, :prefecture do
+      arg :name, non_null(:string)
+      resolve(&GeographyResolver.get_prefecture_by_name/3)
     end
   end
 
