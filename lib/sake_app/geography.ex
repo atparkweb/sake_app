@@ -132,6 +132,10 @@ defmodule SakeApp.Geography do
 
   """
   def get_prefecture!(id), do: Repo.get!(Prefecture, id)
+  
+  def get_prefecture_by!(args) do
+    Repo.get_by!(Prefecture, args)
+  end
 
   @doc """
   Creates a prefecture.
