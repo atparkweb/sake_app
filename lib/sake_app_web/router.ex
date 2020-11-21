@@ -10,21 +10,16 @@ defmodule SakeAppWeb.Router do
     plug Guardian.Plug.LoadResource
   end
   
-  pipeline :api do
+  pipeline :graphql do
     plug CORSPlug, origin: "http://localhost:3000"
     plug :accepts, ["json"]
     
     forward "/graphiql", Absinthe.Plug.GraphiQL,
       schema: SakeAppWeb.Schema
-
-    plug Absinthe.Plug, schema: SakeAppWeb.Schema
+    forward("/", Absinthe.Plug, schema: SakeAppWeb.Schema)
   end
   
-  scope "/login", SakeAppWeb do
-    pipe_through :api
-  end
-
-  scope "/api/v1", SakeAppWeb do
-    pipe_through [:api, :protected]
+  scope "/api", SakeAppWeb do
+    pipe_through :graphql
   end
 end
