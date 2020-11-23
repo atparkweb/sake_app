@@ -29,7 +29,7 @@ config :sake_app, SakeApp.Guardian,
   #optional
   verify_issuer: true,
   secret_key: System.get_env("GUARDIAN_SECRET"),
-  serializer: SakeApp.Guardian
+  serializer: SakeApp.GuardianSerializer
 
 # Configures Elixir's Logger
 config :logger, :console,
