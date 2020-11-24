@@ -1,0 +1,2 @@
+<h1>Showing Product</h1>
+<b><%= product_title(@product) %></b> (<%= @product.id %>)
