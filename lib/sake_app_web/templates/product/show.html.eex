@@ -1,2 +1,5 @@
 <h1>Showing Product</h1>
-<b><%= product_title(@product) %></b> (<%= @product.id %>)
+<dl>
+  <dt>Name</dt><dd><%= @product.name %></dd>
+  <dt>Brand</dt><dd><%= @product.brand %></dd>
+</dl>

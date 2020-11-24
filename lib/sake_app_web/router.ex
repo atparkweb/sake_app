@@ -30,8 +30,7 @@ defmodule SakeAppWeb.Router do
   scope "/admin", SakeAppWeb do
     pipe_through :browser
     
-    get "/product/:id", ProductController, :show
-    get "/product", ProductController, :index
+    resources "/product", ProductController, only: [:index, :show]
   end
   
   scope "/api", SakeAppWeb do

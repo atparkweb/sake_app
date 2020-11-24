@@ -1,4 +1,15 @@
 <section>
   <h1>Sake App Admin</h1>
-  <p>This is the backend</p>
+  <table>
+    <%= for product <- @products do %>
+       <tr>
+	 <td><%= product.name %></td>
+	 <td><%= product.name_kanji %></td>
+	 <td><%= product.brand %></td>
+	 <td><%= product.brand_kanji %></td>
+	 <td><%= product.prefecture %></td>
+	 <td><%= link "View", to: Routes.product_path(@conn, :show, product.id) %></td>
+       </tr>
+    <% end %>
+  </table>
 </section>
