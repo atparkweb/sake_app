@@ -2,10 +2,9 @@ defmodule SakeAppWeb.ProductController do
   use SakeAppWeb, :controller
   
   alias SakeApp.Sake
-  alias SakeApp.Repo
 
   def index(conn, _params) do
-    products = Sake.list_products() |> Repo.preload :prefectures
+    products = Sake.list_products()
     render(conn, products: products)
   end
   
