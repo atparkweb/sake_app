@@ -37,6 +37,7 @@ defmodule SakeAppWeb.Auth do
     configure_session(conn, drop: true)
   end
   
+  # function plug to be used in router pipelines
   def authenticate_user(conn, _opts) do
     if conn.assigns.current_user do
       conn

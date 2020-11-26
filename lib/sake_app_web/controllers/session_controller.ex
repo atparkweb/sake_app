@@ -5,8 +5,8 @@ defmodule SakeAppWeb.SessionController do
     render(conn, "new.html")
   end
   
-  def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
-    case SakeApp.Accounts.authenticate_by_email_pass(email, password) do
+  def create(conn, %{"session" => %{"username" => username, "password" => password}}) do
+    case SakeApp.Accounts.authenticate_by_username_pass(username, password) do
       {:ok, user} ->
 	conn
 	|> SakeAppWeb.Auth.login(user)
