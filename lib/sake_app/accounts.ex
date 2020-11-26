@@ -40,7 +40,7 @@ defmodule SakeApp.Accounts do
   def get_user_by(params) do
     Repo.get_by(User, params)
   end
-
+  
   @doc """
   Creates a user.
 
@@ -117,8 +117,22 @@ defmodule SakeApp.Accounts do
     User.registration_changeset(user, attrs)
   end
   
-  def authenticate_by_email_pass(email, given_pass) do
-    user = get_user_by(email: email)
+  defp is_email(input) do
+    Regex.match?(~r/(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)/i, input)
+  end
+  
+  defp user_by_email_or_username(input) do
+    cond do
+      is_email(input) ->
+	get_user_by(email: input)
+      true ->
+        get_user_by(username: input)
+    end
+  end
+  
+  def authenticate_by_username_pass(username, given_pass) do
+    user = user_by_email_or_username(username)
+
     cond do
       user && Pbkdf2.verify_pass(given_pass, user.password_hash) ->
         {:ok, user}

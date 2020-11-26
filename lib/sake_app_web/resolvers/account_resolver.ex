@@ -5,8 +5,8 @@ defmodule SakeAppWeb.Resolvers.AccountResolver do
     Accounts.register_user(params)
   end
   
-  def login(%{email: email, password: password}, _info) do
-    case Accounts.authenticate_by_email_pass(email, password) do
+  def login(%{username: username, password: password}, _info) do
+    case Accounts.authenticate_by_username_pass(username, password) do
       {:ok, user} ->
          with {:ok, jwt, _} <- SakeApp.Guardian.encode_and_sign(user),
 	      {:ok, _ } <- Accounts.store_token(user, jwt) do
