@@ -1,6 +1,7 @@
 defmodule SakeApp.TestHelpers do
   alias SakeApp.Sake
   alias SakeApp.Geography
+  alias SakeApp.Accounts
 
   def prefecture_fixture(attrs \\ %{}) do
     {:ok, region} = Geography.create_region(%{
@@ -80,5 +81,18 @@ defmodule SakeApp.TestHelpers do
       |> Sake.create_type()
       
     type
+  end
+  
+  def user_fixture(attrs \\ %{}) do
+    {:ok, _user} =
+      attrs
+      |> Enum.into(%{
+	  name: "Test User",
+	  username: "user#{System.unique_integer([:positive])}",
+	  email: "user@example.com",
+	  birthdate: ~D[1981-04-17],
+	  password: attrs[:password] || "Secret123"
+      })
+      |> Accounts.register_user()
   end
 end

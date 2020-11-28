@@ -1,24 +1,26 @@
 defmodule SakeApp.AccountsTest do
-  use SakeApp.DataCase
+  use SakeApp.DataCase, async: true
 
   alias SakeApp.Accounts
-
+  alias SakeApp.Accounts.User
+  
+  @valid_attrs %{
+    name: "Test User",
+    username: "testuser",
+    password: "Secret123",
+    birthdate: ~D[2010-04-17],
+    email: "user@email.com"
+  }
+  @invalid_attrs %{}
+  @update_attrs %{
+    name: "Updated Name",
+    username: "testuser2",
+    password: "Secret321",
+    birthdate: ~D[2011-05-18],
+    emal: "test@email.com"
+  }
+    
   describe "users" do
-    alias SakeApp.Accounts.User
-
-    @valid_attrs %{birthdate: ~D[2010-04-17], email: "some@email.com", password_hash: "some password_hash", username: "some username"}
-    @update_attrs %{birthdate: ~D[2011-05-18], email: "some_updated@email.com", password_hash: "some updated password_hash", username: "some updated username"}
-    @invalid_attrs %{birthdate: nil, email: nil, password_hash: nil, username: nil}
-
-    def user_fixture(attrs \\ %{}) do
-      {:ok, user} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Accounts.create_user()
-
-      user
-    end
-
     test "list_users/0 returns all users" do
       user = user_fixture()
       assert Accounts.list_users() == [user]
@@ -27,18 +29,6 @@ defmodule SakeApp.AccountsTest do
     test "get_user!/1 returns the user with given id" do
       user = user_fixture()
       assert Accounts.get_user!(user.id) == user
-    end
-
-    test "create_user/1 with valid data creates a user" do
-      assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.birthdate == ~D[2010-04-17]
-      assert user.email == "some@email.com"
-      assert user.password_hash == "some password_hash"
-      assert user.username == "some username"
-    end
-
-    test "create_user/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Accounts.create_user(@invalid_attrs)
     end
 
     test "update_user/2 with valid data updates the user" do
@@ -65,6 +55,15 @@ defmodule SakeApp.AccountsTest do
     test "change_user/1 returns a user changeset" do
       user = user_fixture()
       assert %Ecto.Changeset{} = Accounts.change_user(user)
+    end
+  end
+
+  describe "register_user/1" do
+    test "with valid data inserts user" do
+      assert {:ok, %User{id: id} = user} = Accounts.register_user(@valid_attrs)
+      assert user.name == "Test User"
+      assert user.username == "testuser"
+      assert [%User{id: ^id}] = Accounts.list_users()
     end
   end
 end

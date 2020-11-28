@@ -71,15 +71,6 @@ defmodule SakeApp.GeographyTest do
     @update_attrs %{name: "some updated name", name_kanji: "some updated name_kanji"}
     @invalid_attrs %{name: nil, name_kanji: nil}
 
-    def prefecture_fixture(attrs \\ %{}) do
-      {:ok, prefecture} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Geography.create_prefecture()
-
-      prefecture
-    end
-
     test "list_prefectures/0 returns all prefectures" do
       prefecture = prefecture_fixture()
       assert Geography.list_prefectures() == [prefecture]

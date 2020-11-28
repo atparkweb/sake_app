@@ -89,8 +89,8 @@ defmodule SakeApp.SakeTest do
       {:ok,
         prefecture: TestHelpers.prefecture_fixture(),
         designation: TestHelpers.designation_fixture(),
-        rice: TestHelpers.rice_fixture(),
-        type: TestHelpers.type_fixture()
+        rice: rice_fixture(),
+        type: type_fixture()
       }
     end
     
@@ -324,15 +324,6 @@ defmodule SakeApp.SakeTest do
     @valid_attrs %{long_description: "some long_description", name: "some name", name_kanji: "some name_kanji", short_description: "some short_description"}
     @update_attrs %{long_description: "some updated long_description", name: "some updated name", name_kanji: "some updated name_kanji", short_description: "some updated short_description"}
     @invalid_attrs %{long_description: nil, name: nil, name_kanji: nil, short_description: nil}
-
-    def type_fixture(attrs \\ %{}) do
-      {:ok, type} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Sake.create_type()
-
-      type
-    end
 
     test "list_types/0 returns all types" do
       type = type_fixture()

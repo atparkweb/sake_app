@@ -24,6 +24,7 @@ defmodule SakeApp.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import SakeApp.DataCase
+      import SakeApp.TestHelpers
     end
   end
 
