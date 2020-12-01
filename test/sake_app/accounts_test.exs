@@ -22,13 +22,8 @@ defmodule SakeApp.AccountsTest do
 
   describe "users" do
     test "list_users/0 returns all users" do
-      user = user_fixture()
-      assert Accounts.list_users() == [user]
-    end
-
-    test "get_user!/1 returns the user with given id" do
-      user = user_fixture()
-      assert Accounts.get_user!(user.id) == user
+      assert {:ok, %User{id: id}} = Accounts.register_user(@valid_attrs)
+      assert [%User{id: ^id}] = Accounts.list_users()
     end
 
     test "update_user/2 with valid data updates the user" do
@@ -40,9 +35,10 @@ defmodule SakeApp.AccountsTest do
     end
 
     test "update_user/2 with invalid data returns error changeset" do
-      user = user_fixture()
+      {:ok, user } = Accounts.register_user(@valid_attrs)
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @invalid_attrs)
-      assert user == Accounts.get_user!(user.id)
+      assert user.username == "testuser"
+      assert user.email == "user@email.com"
     end
 
     test "delete_user/1 deletes the user" do
