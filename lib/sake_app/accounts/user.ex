@@ -15,7 +15,7 @@ defmodule SakeApp.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :email, :password_hash, :birthdate])
+    |> cast(attrs, [:username, :email, :birthdate])
     |> validate_required([:email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)

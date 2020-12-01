@@ -5,21 +5,21 @@ defmodule SakeApp.AccountsTest do
   alias SakeApp.Accounts.User
   
   @valid_attrs %{
-    name: "Test User",
     username: "testuser",
     password: "Secret123",
     birthdate: ~D[2010-04-17],
     email: "user@email.com"
   }
-  @invalid_attrs %{}
-  @update_attrs %{
-    name: "Updated Name",
-    username: "testuser2",
-    password: "Secret321",
-    birthdate: ~D[2011-05-18],
-    emal: "test@email.com"
+  @invalid_attrs %{
+    email: "1234",
+    birthdate: "July 30"
   }
-    
+  @update_attrs %{
+    username: "updated_name2",
+    birthdate: ~D[2011-05-18],
+    email: "new@email.com"
+  }
+
   describe "users" do
     test "list_users/0 returns all users" do
       user = user_fixture()
@@ -32,12 +32,11 @@ defmodule SakeApp.AccountsTest do
     end
 
     test "update_user/2 with valid data updates the user" do
-      user = user_fixture()
+      {:ok, user} = Accounts.register_user(@valid_attrs)
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
       assert user.birthdate == ~D[2011-05-18]
-      assert user.email == "some_updated@email.com"
-      assert user.password_hash == "some updated password_hash"
-      assert user.username == "some updated username"
+      assert user.email == "new@email.com"
+      assert user.username == "updated_name2"
     end
 
     test "update_user/2 with invalid data returns error changeset" do
@@ -61,8 +60,8 @@ defmodule SakeApp.AccountsTest do
   describe "register_user/1" do
     test "with valid data inserts user" do
       assert {:ok, %User{id: id} = user} = Accounts.register_user(@valid_attrs)
-      assert user.name == "Test User"
       assert user.username == "testuser"
+      assert user.email == "user@email.com"
       assert [%User{id: ^id}] = Accounts.list_users()
     end
   end

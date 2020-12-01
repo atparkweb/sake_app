@@ -84,15 +84,15 @@ defmodule SakeApp.TestHelpers do
   end
   
   def user_fixture(attrs \\ %{}) do
-    {:ok, _user} =
+    {:ok, user} =
       attrs
       |> Enum.into(%{
-	  name: "Test User",
 	  username: "user#{System.unique_integer([:positive])}",
 	  email: "user@example.com",
 	  birthdate: ~D[1981-04-17],
-	  password: attrs[:password] || "Secret123"
+	  password: "Secret123"
       })
       |> Accounts.register_user()
+    user
   end
 end
