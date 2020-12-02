@@ -16,9 +16,11 @@ defmodule SakeApp.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :email, :birthdate])
-    |> validate_required([:email])
+    |> validate_required([:email, :username])
+    |> validate_length(:email, min: 8, max: 256)
+    |> validate_length(:username, min: 3, max: 16)
     |> validate_format(:email, ~r/@/)
-    |> unique_constraint(:email)
+    |> unique_constraint([:email, :username])
   end
   
   @doc false
@@ -27,7 +29,7 @@ defmodule SakeApp.Accounts.User do
     |> changeset(attrs)
     |> cast(attrs, [:password])
     |> validate_required(:password)
-    |> validate_length(:password, min: 8, max: 100)
+    |> validate_length(:password, min: 8, max: 128)
     |> validate_format(:password, ~r/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)
     |> put_pass_hash()
   end

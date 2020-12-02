@@ -26,7 +26,14 @@ defmodule SakeApp.AccountsTest do
       assert [%User{id: ^id}] = Accounts.list_users()
     end
 
-    test "update_user/2 with valid data updates the user" do
+    test "change_user/1 returns a user changeset" do
+      user = user_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_user(user)
+    end
+  end
+  
+  describe "update_user/2" do
+    test "with valid data updates the user" do
       {:ok, user} = Accounts.register_user(@valid_attrs)
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
       assert user.birthdate == ~D[2011-05-18]
@@ -34,22 +41,19 @@ defmodule SakeApp.AccountsTest do
       assert user.username == "updated_name2"
     end
 
-    test "update_user/2 with invalid data returns error changeset" do
+    test "with invalid data returns error changeset" do
       {:ok, user } = Accounts.register_user(@valid_attrs)
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @invalid_attrs)
       assert user.username == "testuser"
       assert user.email == "user@email.com"
     end
+  end
 
-    test "delete_user/1 deletes the user" do
+  describe "delete_user/1" do
+    test "can delete a user" do
       user = user_fixture()
       assert {:ok, %User{}} = Accounts.delete_user(user)
       assert_raise Ecto.NoResultsError, fn -> Accounts.get_user!(user.id) end
-    end
-
-    test "change_user/1 returns a user changeset" do
-      user = user_fixture()
-      assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
   end
 
