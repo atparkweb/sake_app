@@ -64,5 +64,9 @@ defmodule SakeApp.AccountsTest do
       assert user.email == "user@email.com"
       assert [%User{id: ^id}] = Accounts.list_users()
     end
+    
+    test "with invalid data returns error" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.register_user(@invalid_attrs)
+    end
   end
 end
