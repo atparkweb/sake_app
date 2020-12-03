@@ -95,4 +95,11 @@ defmodule SakeApp.TestHelpers do
       |> Accounts.register_user()
     user
   end
+  
+  # Converts Ecto.Changeset erros to a map with field as key
+  def errors_on(msg, opts) do
+    Enum.reduce(opts, msg, fn {key, value}, acc ->
+      String.replace(acc, "%{#{key}}", to_string(value))
+    end)
+  end
 end

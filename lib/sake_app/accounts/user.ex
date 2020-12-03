@@ -18,7 +18,7 @@ defmodule SakeApp.Accounts.User do
     |> cast(attrs, [:username, :email, :birthdate])
     |> validate_required([:email, :username])
     |> validate_length(:email, min: 8, max: 256)
-    |> validate_length(:username, min: 3, max: 16)
+    |> validate_length(:username, min: 3, max: 32)
     |> validate_format(:email, ~r/@/)
     |> unique_constraint([:email, :username])
   end
