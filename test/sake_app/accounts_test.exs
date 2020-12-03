@@ -69,11 +69,18 @@ defmodule SakeApp.AccountsTest do
       assert {:error, %Ecto.Changeset{}} = Accounts.register_user(@invalid_attrs)
     end
     
-    test "rejects username longer than 32" do
-      long_username_attrs = Map.put(@valid_attrs, :username, "User32vHb575AeUsDYi5SeK3l5jOISxZgrUueN")
-      {:error, %Ecto.Changeset{} = changeset} = Accounts.register_user(long_username_attrs)
+    test "rejects username longer than 32 characters" do
+      attrs = Map.put(@valid_attrs, :username, "User32vHb575AeUsDYi5SeK3l5jOISxZgrUueN")
+      {:error, %Ecto.Changeset{} = changeset} = Accounts.register_user(attrs)
       errors = Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} -> errors_on(msg, opts) end)
       assert errors.username == ["should be at most 32 character(s)"]
+    end
+    
+    test "rejects username shorter than 4 characters" do
+      attrs = Map.put(@valid_attrs, :username, "Bob")
+      {:error, %Ecto.Changeset{} = changeset} = Accounts.register_user(attrs)
+      errors = Ecto.Changeset.traverse_errors(changeset, fn {msg, opts} -> errors_on(msg, opts) end)
+      assert errors.username == ["should be at least 4 character(s)"]
     end
   end
 end
