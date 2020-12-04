@@ -2,6 +2,7 @@ defmodule SakeAppWeb.ProductController do
   use SakeAppWeb, :controller
   
   alias SakeApp.Sake
+  alias SakeApp.Sake.Product
 
   def index(conn, _params) do
     products = Sake.list_products()
@@ -14,7 +15,8 @@ defmodule SakeAppWeb.ProductController do
   end
   
   def new(conn, _params) do
-    render(conn, "new.html")
+    changeset = Product.changeset(%Product{})
+    render(conn, "new.html", changeset: changeset)
   end
   
   def edit(conn, _params) do
@@ -22,15 +24,15 @@ defmodule SakeAppWeb.ProductController do
   end
   
   def create(conn, params) do
-    case SakeApp.Sake.create_product(params) do
-      {:ok, product} ->
+    case Sake.create_product(params) do
+      {:ok, _product} ->
 	conn
-	|> put_flash(:succes, "Product created")
+	|> put_flash(:success, "Product created")
 	|> redirect(to: Routes.product_path(conn, :index))
       {:error, _reason} ->
 	conn
 	|> put_flash(:error, "Unable to save product")
-	|> render("new.html")
+	|> render("new.html", Product.changeset(%Product{}))
     end
   end
 end

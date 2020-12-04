@@ -28,7 +28,7 @@ defmodule SakeApp.Sake.Product do
   end
 
   @doc false
-  def changeset(product, attrs) do
+  def changeset(product, attrs \\ %{}) do
     product
     |> cast(attrs, [:brand, :brand_kanji, :name, :name_kanji, :abv, :acidity, :smv, :designation, :product_rice, :type, :prefecture, :brewery, :short_description, :long_description, :tasting_notes ])
     |> cast_assoc(:designations)
