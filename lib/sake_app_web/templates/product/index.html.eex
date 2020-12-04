@@ -8,7 +8,11 @@
 	 <td><%= product.brand %></td>
 	 <td><%= product.brand_kanji %></td>
 	 <td><%= link "View", to: Routes.product_path(@conn, :show, product.id) %></td>
+	 <td><%= link "Edit", to: Routes.product_path(@conn, :edit, product.id) %></td>
        </tr>
     <% end %>
   </table>
+  <div>
+    <%= link "Add Product", to: Routes.product_path(@conn, :new) %>
+  </div>
 </section>
