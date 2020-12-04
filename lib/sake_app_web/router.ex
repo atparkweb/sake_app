@@ -39,7 +39,7 @@ defmodule SakeAppWeb.Router do
   scope "/admin", SakeAppWeb do
     pipe_through [:browser, :authenticate_user]
     
-    resources "/product", ProductController, only: [:index, :show]
+    resources "/product", ProductController, only: [:index, :new, :show, :edit]
   end
   
   scope "/api", SakeAppWeb do
