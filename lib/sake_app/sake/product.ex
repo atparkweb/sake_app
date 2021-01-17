@@ -16,7 +16,7 @@ defmodule SakeApp.Sake.Product do
     field :short_description, :string
     field :long_description,  :string
     field :tasting_notes,     :string
-    
+    field :flavor_profile,    :string
 
     belongs_to :rice, Rice, foreign_key: :product_rice
     belongs_to :designations, Designation, foreign_key: :designation
@@ -30,7 +30,24 @@ defmodule SakeApp.Sake.Product do
   @doc false
   def changeset(product, attrs \\ %{}) do
     product
-    |> cast(attrs, [:brand, :brand_kanji, :name, :name_kanji, :abv, :acidity, :smv, :designation, :product_rice, :type, :prefecture, :brewery, :short_description, :long_description, :tasting_notes ])
+    |> cast(attrs, [
+                     :brand,
+                     :brand_kanji,
+                     :name,
+                     :name_kanji,
+                     :abv,
+                     :acidity,
+                     :smv,
+                     :designation,
+                     :product_rice,
+                     :type,
+                     :prefecture,
+                     :brewery,
+                     :short_description,
+                     :long_description,
+                     :tasting_notes,
+                     :flavor_profile
+                   ])
     |> cast_assoc(:designations)
     |> cast_assoc(:rice)
     |> cast_assoc(:prefectures)
