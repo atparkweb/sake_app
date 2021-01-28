@@ -40,3 +40,6 @@ config/prod.secret.exs
 
 # Ignore emacs temp backup files
 .\#*
+
+# Ignore emacs undo-tree history
+*~undo-tree~
