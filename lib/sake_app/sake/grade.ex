@@ -10,7 +10,7 @@ defmodule SakeApp.Sake.Grade do
     field :min_polish, :float
     field :name, :string
 
-    has_may :products, Product
+    has_many :products, Product
 
     timestamps()
   end
@@ -20,8 +20,7 @@ defmodule SakeApp.Sake.Grade do
     grade
     |> cast(attrs, [:name, :min_polish, :max_polish, :description])
     |> validate_required([:name, :min_polish, :max_polish])
-    |> validate_inclusion(:min_polish, 0.1..1.0)
-    |> validate_inclusion(:max_polish, 0.1..1.0)
+    |> validate_number([:min_polish, :max_polish], [greater_than: 0.0, less_than_or_equal_to: 1.0])
     |> unique_constraint(:name)
   end
 end

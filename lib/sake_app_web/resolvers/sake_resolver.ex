@@ -25,19 +25,6 @@ defmodule SakeAppWeb.Resolvers.SakeResolver do
     {:ok, Sake.list_rice()}
   end
   
-  def get_designation(_parent, %{id: id}, _resolutions) do
-    case Sake.get_designation!(id) do
-      nil ->
-	{:error, "Designation with id #{id} not found"}
-      designation ->
-	{:ok, designation}
-    end
-  end
-  
-  def list_designations(_parent, _args, _resolutions) do
-    {:ok, Sake.list_designations()}
-  end
-
   def list_types(_parent, _args, _resolutions) do
     {:ok, Sake.list_types()}
   end

@@ -11,7 +11,7 @@ defmodule SakeApp.Sake.Rice do
     
     belongs_to :prefectures, SakeApp.Geography.Prefecture, foreign_key: :prefecture
     
-    has_many :products, Product
+    has_many :products, Product, foreign_key: :product_rice
 
     timestamps()
   end

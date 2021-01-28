@@ -3,7 +3,6 @@ defmodule SakeApp.Sake.Product do
   import Ecto.Changeset
   
   alias SakeApp.Geography.Prefecture
-  alias SakeApp.Sake.{Rice, Type, Designation, Brewery}
 
   schema "products" do
     field :abv,               :float
@@ -47,8 +46,8 @@ defmodule SakeApp.Sake.Product do
                      :short_description,
                      :long_description,
                      :tasting_notes,
-                     :flavor_profile
-		     :genshu
+                     :flavor_profile,
+		     :genshu,
 		     :junmai
                    ])
     |> cast_assoc(:grade)
