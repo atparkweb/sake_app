@@ -1,12 +1,17 @@
 defmodule SakeApp.Geography.Prefecture do
   use SakeApp.Schema
   import Ecto.Changeset
+  
+  alias SakeApp.Geography.Region
+  alias SakeApp.Sake.Rice
 
   schema "prefectures" do
     field :name, :string
     field :name_kanji, :string
     
-    belongs_to :regions, SakeApp.Geography.Region, foreign_key: :region
+    belongs_to :regions, Region, foreign_key: :region
+
+    has_many :rice, Rice
 
     timestamps()
   end

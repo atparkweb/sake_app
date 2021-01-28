@@ -10,9 +10,9 @@ defmodule SakeApp.Sake.Grade do
     field :min_polish, :float
     field :name, :string
 
-    timestamps()
-    
     has_may :products, Product
+
+    timestamps()
   end
 
   @doc false

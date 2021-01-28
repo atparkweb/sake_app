@@ -1,6 +1,8 @@
 defmodule SakeApp.Sake.Rice do
   use SakeApp.Schema
   import Ecto.Changeset
+  
+  alias SakeApp.Sake.Product
 
   schema "rice" do
     field :name, :string
@@ -8,6 +10,8 @@ defmodule SakeApp.Sake.Rice do
     field :description, :string
     
     belongs_to :prefectures, SakeApp.Geography.Prefecture, foreign_key: :prefecture
+    
+    has_many :products, Product
 
     timestamps()
   end

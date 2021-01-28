@@ -17,9 +17,11 @@ defmodule SakeApp.Sake.Product do
     field :long_description,  :string
     field :tasting_notes,     :string
     field :flavor_profile,    :string
+    field :genshu,            :boolean
+    field :junmai,            :boolean
 
     belongs_to :rice, Rice, foreign_key: :product_rice
-    belongs_to :designations, Designation, foreign_key: :designation
+    belongs_to :grades, Grade, foreign_key: :grade
     belongs_to :types, Type, foreign_key: :type
     belongs_to :prefectures, Prefecture, foreign_key: :prefecture
     belongs_to :breweries, Brewery, foreign_key: :brewery
@@ -38,7 +40,6 @@ defmodule SakeApp.Sake.Product do
                      :abv,
                      :acidity,
                      :smv,
-                     :designation,
                      :product_rice,
                      :type,
                      :prefecture,
@@ -47,8 +48,10 @@ defmodule SakeApp.Sake.Product do
                      :long_description,
                      :tasting_notes,
                      :flavor_profile
+		     :genshu
+		     :junmai
                    ])
-    |> cast_assoc(:designations)
+    |> cast_assoc(:grade)
     |> cast_assoc(:rice)
     |> cast_assoc(:prefectures)
     |> cast_assoc(:breweries)
