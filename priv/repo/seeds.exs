@@ -410,172 +410,6 @@ Repo.insert_all(Geography.Prefecture, [
       }
 ])
 
-Repo.insert_all(Sake.Designation, [
-  %{
-    name: "Junmai",
-    polish_ratio_remain: 0.0,
-    short_description: "Pure rice, 50% or less of rice remaining.",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Junmai Daiginjō",
-    polish_ratio_remain: 0.5,
-    short_description: "Pure rice, 50% or less of rice remaining.",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Daiginjō",
-    polish_ratio_remain: 0.5,
-    short_description: "Distilled alcohol added. 50% or less of rice remaining.",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Junmai Ginjō",
-    polish_ratio_remain: 0.6,
-    short_description: "Pure rice, 60% or less of rice remaining.",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Ginjō",
-    polish_ratio_remain: 0.6,
-    short_description: "Distilled alcohol added. 60% or less of rice remaining.",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Tokubetsu Junmai",
-    polish_ratio_remain: 0.6,
-    short_description: "Pure rice, 60% or less of rice remaining. Special brewing method.",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Tokubetsu Honjōzō",
-    polish_ratio_remain: 0.7,
-    short_description: "Distilled alcohol added, 70% or less of rice remaining. Special brewing method.",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Honjōzō",
-    polish_ratio_remain: 0.7,
-    short_description: "Distilled alcohol added. 60% or less of rice remaining.",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-])
-
-Repo.insert_all(Sake.Type, [
-  %{
-    name: "Nama",
-    name_kanji: "生",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Akai",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Taru",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Sparkling",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Kinapaku-iri",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Arabashiri",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Genshu",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Namachozo",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Koshu",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Yamahai",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Kimoto",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-  %{
-    name: "Nigori",
-    name_kanji: "",
-    short_description: "",
-    long_description: "",
-    inserted_at: DateTime.truncate(Timex.now, :second),
-    updated_at: DateTime.truncate(Timex.now, :second)
-  },
-])
-
 %{id: akita} = Repo.get_by!(Geography.Prefecture, name: "Akita")
 %{id: niigata} = Repo.get_by!(Geography.Prefecture, name: "Niigata")
 %{id: hyogo} = Repo.get_by!(Geography.Prefecture, name: "Hyōgo")
@@ -697,10 +531,28 @@ Repo.insert_all(Sake.Rice, [
   }
 ])
 
+Repo.insert_all(Sake.Grade, [
+      %{
+	name: "Daiginjo",
+	max_polish: 1.0,
+	min_polish: 0.5,
+	description: "Daiginjo description",
+	inserted_at: DateTime.truncate(Timex.now, :second),
+	updated_at: DateTime.truncate(Timex.now, :second)
+      },
+      %{
+	name: "Ginjo",
+	max_polish: 0.5,
+	min_polish: 0.4,
+	description: "Ginjo description",
+	inserted_at: DateTime.truncate(Timex.now, :second),
+	updated_at: DateTime.truncate(Timex.now, :second)
+      }
+    ]);
+
 %{ id: komachi } = Repo.get_by!(Sake.Rice, name: "Komachi")
-%{ id: tokubetsu_junmai } = Repo.get_by!(Sake.Designation, name: "Tokubetsu Junmai")
-%{ id: genshu } = Repo.get_by!(Sake.Type, name: "Genshu")
 %{ id: azakura_brewery } = Repo.get_by!(Sake.Brewery, name: "Azakura")
+%{ id: daiginjo } = Repo.get_by!(Sake.Grade, name: "Daiginjo")
 
 Repo.insert_all(Sake.Product, [
   %{
@@ -709,13 +561,14 @@ Repo.insert_all(Sake.Product, [
     brand_kanji: "阿櫻",
     prefecture: akita,
     brewery: azakura_brewery,
-    designation: tokubetsu_junmai,
-    type: genshu,
     abv: 0.16,
     long_description: "",
     short_description: "",
     tasting_notes: "Rich, Dry",
     product_rice: komachi,
+    grade: daiginjo,
+    genshu: false,
+    junmai: true,
     inserted_at: DateTime.truncate(Timex.now, :second),
     updated_at: DateTime.truncate(Timex.now, :second)
   }
