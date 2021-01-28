@@ -11,6 +11,5 @@ defmodule SakeApp.Repo.Migrations.CreateGrades do
 
       timestamps()
     end
-
   end
 end
