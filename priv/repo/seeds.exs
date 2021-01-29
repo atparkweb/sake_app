@@ -534,17 +534,29 @@ Repo.insert_all(Sake.Rice, [
 Repo.insert_all(Sake.Grade, [
       %{
 	name: "Daiginjo",
-	max_polish: 1.0,
-	min_polish: 0.5,
+	max_polish_remain: 0.5,
 	description: "Daiginjo description",
 	inserted_at: DateTime.truncate(Timex.now, :second),
 	updated_at: DateTime.truncate(Timex.now, :second)
       },
       %{
 	name: "Ginjo",
-	max_polish: 0.5,
-	min_polish: 0.4,
+	max_polish_remain: 0.6,
 	description: "Ginjo description",
+	inserted_at: DateTime.truncate(Timex.now, :second),
+	updated_at: DateTime.truncate(Timex.now, :second)
+      },
+      %{
+	name: "Honjozo",
+	max_polish_remain: 0.7,
+	description: "Honjozo description",
+	inserted_at: DateTime.truncate(Timex.now, :second),
+	updated_at: DateTime.truncate(Timex.now, :second)
+      },
+      %{
+	name: "Unspecified",
+	max_polish_remain: 1.0,
+	description: "Honjozo description",
 	inserted_at: DateTime.truncate(Timex.now, :second),
 	updated_at: DateTime.truncate(Timex.now, :second)
       }

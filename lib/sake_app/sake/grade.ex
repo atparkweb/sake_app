@@ -6,8 +6,8 @@ defmodule SakeApp.Sake.Grade do
 
   schema "grades" do
     field :description, :string
-    field :max_polish, :float
-    field :min_polish, :float
+    field :max_polish_remain, :float
+    field :min_polish_remain, :float
     field :name, :string
 
     has_many :products, Product
@@ -18,9 +18,9 @@ defmodule SakeApp.Sake.Grade do
   @doc false
   def changeset(grade, attrs) do
     grade
-    |> cast(attrs, [:name, :min_polish, :max_polish, :description])
-    |> validate_required([:name, :min_polish, :max_polish])
-    |> validate_number([:min_polish, :max_polish], [greater_than: 0.0, less_than_or_equal_to: 1.0])
+    |> cast(attrs, [:name, :min_polish_remain, :max_polish_remain, :description])
+    |> validate_required([:name, :min_polish_remain, :max_polish_remain])
+    |> validate_number([:min_polish_remain, :max_polish_remain], [greater_than: 0.0, less_than_or_equal_to: 1.0])
     |> unique_constraint(:name)
   end
 end
