@@ -10,10 +10,9 @@ defmodule SakeAppWeb.Schema.Sake.ProductTypes do
     field :smv,         :float
     field :description, :string
     field :notes,       :string
-    field :type,        :type,        resolve: assoc(:type)
-    field :designation, :designation, resolve: assoc(:designation)
-    field :rice,        :rice,        resolve: assoc(:rice)
-    field :brewery,     :brewery,     resolve: assoc(:breweries)
+    field :type,        :type,     resolve: assoc(:type)
+    field :rice,        :rice,     resolve: assoc(:rice)
+    field :brewery,     :brewery,  resolve: assoc(:brewery)
   end
   
   object :product_queries do

@@ -16,6 +16,7 @@ defmodule SakeApp.Sake.Product do
     field :long_description,  :string
     field :tasting_notes,     :string
     field :flavor_profile,    :string
+    field :seimai_buai,       :float
     field :genshu,            :boolean
     field :junmai,            :boolean
 
@@ -39,6 +40,7 @@ defmodule SakeApp.Sake.Product do
                      :abv,
                      :acidity,
                      :smv,
+		     :semai_buai,
                      :product_rice,
                      :type,
                      :prefecture,
@@ -55,6 +57,7 @@ defmodule SakeApp.Sake.Product do
     |> cast_assoc(:prefectures)
     |> cast_assoc(:breweries)
     |> validate_required([:brand, :name])
+    |> validate_number(:semai_buai, [greater_than: 0.0, less_than_or_equal_to: 1.0])
     |> unique_constraint([:name, :brand])
   end
 end

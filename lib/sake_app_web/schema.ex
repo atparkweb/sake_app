@@ -6,7 +6,6 @@ defmodule SakeAppWeb.Schema do
   }
   alias SakeAppWeb.Schema.Sake.{
     BreweryTypes,
-    DesignationTypes,
     ProductTypes,
     RiceTypes,
     TypeTypes
@@ -16,7 +15,6 @@ defmodule SakeAppWeb.Schema do
   import_types(GeographyTypes)
   import_types(AccountTypes)
   import_types(BreweryTypes)
-  import_types(DesignationTypes)
   import_types(ProductTypes)
   import_types(RiceTypes)
   import_types(TypeTypes)
@@ -28,7 +26,6 @@ defmodule SakeAppWeb.Schema do
     import_fields(:account_queries)
 
     import_fields(:brewery_queries)
-    import_fields(:designation_queries)
     import_fields(:product_queries)
     import_fields(:rice_queries)
     import_fields(:type_queries)
