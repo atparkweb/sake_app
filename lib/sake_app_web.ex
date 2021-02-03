@@ -23,7 +23,6 @@ defmodule SakeAppWeb do
 
       import Plug.Conn
       import SakeAppWeb.Gettext
-      import SakeAppWeb.Auth, only: [authenticate_user: 2]
       alias SakeAppWeb.Router.Helpers, as: Routes
     end
   end
@@ -49,7 +48,6 @@ defmodule SakeAppWeb do
 
       import Plug.Conn
       import Phoenix.Controller
-      import SakeAppWeb.Auth, only: [authenticate_user: 2]
     end
   end
 
