@@ -1,5 +1,8 @@
 # SakeApp
 
+This was an exercise in creating an Elixir GraphQL Backend. The project is now
+retired as I move to a cloud based solution.
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
